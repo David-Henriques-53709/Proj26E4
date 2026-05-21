@@ -1,0 +1,24 @@
+package PROJ26E4;
+
+public class Piso {
+	private String idPiso;
+	private int numPiso;
+	private String descricao;
+	private String idBloco;
+	
+	public Piso(String idPiso, int numPiso, String descricao, String idbloco) {
+		this.idPiso = idPiso;
+		this.numPiso = numPiso;
+		this.descricao = descricao;
+		this.idBloco = idBloco;
+	}
+	
+	public void mostrarOcorrencias() {
+		System.out.println("Ocorrências do piso: "  + numPiso);
+	}
+	
+	@Override
+	public String toString() {
+		return "Piso:" + numPiso + "|ID do Piso:" + idPiso + "| Bloco em que se encontra: " + idBloco + "| Descrição: " + descricao;
+	}
+}
