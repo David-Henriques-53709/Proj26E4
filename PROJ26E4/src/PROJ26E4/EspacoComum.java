@@ -1,4 +1,6 @@
-package Projeto;
+package PROJ26E4;
+
+import Projeto.Piso;
 
 public class EspacoComum extends Piso {
 
