@@ -66,5 +66,4 @@ public class Ocorrencia {
 				+ getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
 	}
 	
- }
 }
