@@ -32,5 +32,24 @@ public class Mapa {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+	
+    public void mostrarMapa() {
+        System.out.println("==========================================");
+        System.out.println("               MAPA:  " + nomeMapa);
+        System.out.println("==========================================");
+        System.out.println("ID       : " + idMapa);
+        System.out.println("Nome     : " + nomeMapa);
+        System.out.println("Descrição: " + descricao);
+        System.out.println("==========================================");
+    }
+ 
+    @Override
+    public String toString() {
+        return "Mapa{" +
+                "idMapa='" + idMapa + '\'' +
+                ", nomeMapa='" + nomeMapa + '\'' +
+                ", descricao='" + descricao + '\'' +
+                '}';
+    }
 
 }
