@@ -1,11 +1,5 @@
-/**
- * 
- */
 package PROJ26E4;
 
-/**
- * 
- */
 public class CategoriaOcorrencia {
 	private String idCategoria;
 	private String nomeCategoria;
