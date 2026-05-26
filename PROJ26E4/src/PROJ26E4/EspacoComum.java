@@ -1,6 +1,6 @@
 package PROJ26E4;
 
-public class EspacoComum extends Piso {
+public class EspacoComum {
 
     private String idEspacoComum;
     private String nomeEspaco;
@@ -9,7 +9,6 @@ public class EspacoComum extends Piso {
 
     public EspacoComum(String idEspacoComum, String nomeEspaco, String descricaoEspaco, int capacidadeMaxima) {
 
-        super();
         this.idEspacoComum = idEspacoComum;
         this.nomeEspaco = nomeEspaco;
         this.descricaoEspaco = descricaoEspaco;
@@ -31,8 +30,10 @@ public class EspacoComum extends Piso {
 	public int getCapacidadeMaxima() {
 		return capacidadeMaxima;
 	}
-
 	public String toString() {
-        return idEspacoComum + nomeEspaco + " serve para " + descricaoEspaco + " com capacidade para " + capacidadeMaxima + " pessoas. ";
-    }
-}
+	    return "ID Espaço: " + idEspacoComum +
+	           " | Nome: " + nomeEspaco +
+	           " | Descrição: " + descricaoEspaco +
+	           " | Capacidade: " + capacidadeMaxima;
+	}
+ }

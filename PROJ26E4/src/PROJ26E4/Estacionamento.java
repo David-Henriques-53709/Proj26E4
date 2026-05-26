@@ -1,6 +1,6 @@
 package PROJ26E4;
 
-public class Estacionamento extends Piso {
+public class Estacionamento {
 
     private String idEstacionamento;
     private int numeroLugares;
@@ -8,7 +8,6 @@ public class Estacionamento extends Piso {
 
     public Estacionamento (String idEstacionamento, int numeroLugares, String tipoEstacionamento) {
 
-        super();
         this.idEstacionamento = idEstacionamento;
         this.numeroLugares = numeroLugares;
         this.tipoEstacionamento = tipoEstacionamento;
@@ -27,6 +26,8 @@ public class Estacionamento extends Piso {
 	}
 
 	public String toString() {
-        return " Estacionamento " + idEstacionamento + " com " + numeroLugares + " lugares e do tipo " + tipoEstacionamento + ".";
-    }
+	    return "ID Estacionamento: " + idEstacionamento +
+	           " | Lugares: " + numeroLugares +
+	           " | Tipo: " + tipoEstacionamento;
+	}
 }

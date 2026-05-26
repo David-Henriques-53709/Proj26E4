@@ -16,7 +16,7 @@ public class CategoriaOcorrencia {
 		this.nomeCategoria=nomeCategoria;
 		this.descricao=descricao;
 		}
-	public String getCategoria() {
+	public String getIdCategoria() {
 		return idCategoria;	
 		}
 	public String getNomeCategoria() {

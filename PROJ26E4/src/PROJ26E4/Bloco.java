@@ -10,8 +10,25 @@ public class Bloco {
 		this.nomeBloco = nomeBloco;
 		this.descricao = descricao;
 		}
+	/**
+	 * @return the idBloco
+	 */
+	public String getIdBloco() {
+		return idBloco;
+	}
+	/**
+	 * @return the nomeBloco
+	 */
+	public String getNomeBloco() {
+		return nomeBloco;
+	}
+	/**
+	 * @return the descricao
+	 */
+	public String getDescricao() {
+		return descricao;
+	}
 	
-	@Override
 	public String toString() {
 		return "ID do Bloco:" + idBloco + "| Nome do Bloco: " + nomeBloco + "| Descrição: " + descricao;
 	}

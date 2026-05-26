@@ -48,21 +48,25 @@ public class Teste {
      
         // Criando uma Sala (Herda de Piso)
         Sala pratica = new Sala(
-            "PIS-02", 2, "Segundo andar do Bloco A", "BLC-A", 
-            "S-204", "Laboratório de Redes", 32, "Informática"
-        );
-        
+        	    "S-204",
+        	    "Laboratório de Redes",
+        	    32,
+        	    "Informática"
+        	);
         // Criando um Espaço Comum (Herda de Piso)
         EspacoComum auditorio = new EspacoComum(
-            "PIS-01", 1, "Primeiro andar do Bloco A", "BLC-A", 
-            "EC-01", "Aula Magna", "Anfiteatro para palestras", 120
-        );
+        	    "EC-01",
+        	    "Aula Magna",
+        	    "Anfiteatro para palestras",
+        	    120
+        	);
         
         // Criando um Estacionamento (Herda de Piso)
         Estacionamento parqueSubterraneo = new Estacionamento(
-            "PIS-01", 1, "Estacionamento do Bloco A", "BLC-A", 
-            "EST-A", 45, "Coberto - Exclusivo Clientes da UPT"
-        );
+        	    "EST-A",
+        	    45,
+        	    "Coberto - Exclusivo Clientes da UPT"
+        	);
 
         System.out.println(mapaUPT);
         System.out.println(blocoA);
