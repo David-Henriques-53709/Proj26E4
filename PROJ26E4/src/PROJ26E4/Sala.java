@@ -1,15 +1,14 @@
 package PROJ26E4;
 
-public class Sala extends Piso {
+public class Sala {
 
     private String idSala;
     private String nomeSala;
     private int capacidade;
     private String tipoSala;
 
-    public Sala(String idPiso, int numPiso, String descricao, String idBloco, String idSala, String nomeSala, int capacidade, String tipoSala) {
+    public Sala(String idSala, String nomeSala, int capacidade, String tipoSala) {
 
-        super(idPiso, numPiso, descricao, idBloco);
         this.idSala = idSala;
         this.nomeSala = nomeSala;
         this.capacidade = capacidade;

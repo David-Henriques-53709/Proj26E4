@@ -53,17 +53,21 @@ public class Ocorrencia {
 	public void setPrioridade(Prioridade prioridade) {
 		this.prioridades=prioridade;
 	}
-	public void consultarEstado() {
-		this.estadoAtual = novoEstado ;
-		
+	public void setEstado(EstadoOcorrencia novoEstado) {
+		this.estadoAtual = novoEstado;
 	}
-	@Override
+	public void consultarEstado() {
+		if (estadoAtual == null) {
+            System.out.println("Ocorrência sem estado definido.");
+        } else {
+            System.out.println("Estado atual: " + estadoAtual);
+        }
+	}
 	public String toString() {
 		return "Ocorrencia [idOcorrencia=" + idOcorrencia + ", titulo=" + titulo + ", descricao=" + descricao
 				+ ", dataCriacao=" + dataCriacao + ", prioridades=" + prioridades + ", getIdOcorrencia()="
 				+ getIdOcorrencia() + ", getTitulo()=" + getTitulo() + ", getDescricao()=" + getDescricao()
 				+ ", getDataCriacao()=" + getDataCriacao() + ", getPrioridades()=" + getPrioridades() + ", getClass()="
 				+ getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
-	}
-	
+	}	
  }
