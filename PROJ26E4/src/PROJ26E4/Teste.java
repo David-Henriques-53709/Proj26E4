@@ -1,5 +1,4 @@
 package PROJ26E4;
-
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -97,9 +96,15 @@ public class Teste {
                         System.out.println("\nCrie primeiro um utilizador!");
                         break;
                     }
+                    System.out.println("\n===== UTILIZADORES =====");
+                    for (int i = 0; i < sistema.getUtilizadores().size(); i++) {
+                        System.out.println((i + 1) + " - " +sistema.getUtilizadores().get(i).getNome());
+                    }
+                    System.out.print("Escolha o utilizador: ");
+                    int utilizadorEscolha = sc.nextInt();
+                    sc.nextLine();
+                    utilizadorAtual =sistema.getUtilizadores().get(utilizadorEscolha - 1);
                     System.out.println("\n========== CRIAR OCORRÊNCIA ==========");
-                    System.out.print("ID da Ocorrência: ");
-                    String idOc = sc.nextLine();
                     System.out.print("Título: ");
                     String titulo = sc.nextLine();
                     System.out.print("Descrição: ");
@@ -155,7 +160,75 @@ public class Teste {
                     } else if(localEscolha == 2) {
                         local = "Estacionamento";
                     } else {
-                        local = "Espaço Comum";
+                        System.out.println("\n===== ESPAÇOS COMUNS =====");
+                        if(blocoEscolha == 1) {
+                            if(pisoEscolha == 1) {
+                                System.out.println("1 - Biblioteca");
+                                System.out.println("2 - Secretaria");
+                                System.out.println("3 - Papelaria");
+                                System.out.println("4 - Corredor");
+                                System.out.println("5 - Espelho de Água");
+                                System.out.print("Escolha: ");
+                                int espaco = sc.nextInt();
+                                sc.nextLine();
+                                switch(espaco) {
+                                    case 1:
+                                        local = "Biblioteca";
+                                        break;
+                                    case 2:
+                                        local = "Secretaria";
+                                        break;
+                                    case 3:
+                                        local = "Papelaria";
+                                        break;
+                                    case 4:
+                                        local = "Corredor";
+                                        break;
+                                    case 5:
+                                        local = "Espelho de Água";
+                                        break;
+                                }
+                            }
+                            else if(pisoEscolha == 2) {
+                                System.out.println("1 - Bar");
+                                System.out.println("2 - Corredor");
+                                System.out.print("Escolha: ");
+                                int espaco = sc.nextInt();
+                                sc.nextLine();
+                                if(espaco == 1) {
+                                    local = "Bar";
+                                } else {
+                                    local = "Corredor";
+                                }
+                            }
+                            else {
+                                local = "Corredor";
+                            }
+                        }
+                        else {
+                            if(pisoEscolha == 1) {
+                                System.out.println("1 - Cantina");
+                                System.out.println("2 - Sala de Estudo");
+                                System.out.println("3 - Corredor");
+                                System.out.print("Escolha: ");
+                                int espaco = sc.nextInt();
+                                sc.nextLine();
+                                switch(espaco) {
+                                    case 1:
+                                        local = "Cantina";
+                                        break;
+                                    case 2:
+                                        local = "Sala de Estudo";
+                                        break;
+                                    case 3:
+                                        local = "Corredor";
+                                        break;
+                                }
+                            }
+                            else {
+                                local = "Corredor";
+                            }
+                        }
                     }
                     System.out.println("\nPrioridade:");
                     System.out.println("1 - Alta");
@@ -176,7 +249,6 @@ public class Teste {
                             prioridade = Prioridade.Baixa;
                     }
                     utilizadorAtual.criarOcorrencia(
-                            idOc,
                             titulo,
                             descricao,
                             prioridade,

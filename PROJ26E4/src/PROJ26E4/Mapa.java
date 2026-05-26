@@ -1,8 +1,6 @@
 package PROJ26E4;
 
 public class Mapa {
-	
-
 	public Mapa(String idMapa, String nomeMapa, String descricao) {
 		this.idMapa = idMapa;
 		this.nomeMapa = nomeMapa;
@@ -12,8 +10,6 @@ public class Mapa {
     private String nomeMapa;
     private String descricao;
 
-    
-    
 	public String getIdMapa() {
 		return idMapa;
 	}
@@ -43,7 +39,6 @@ public class Mapa {
         System.out.println("==========================================");
     }
  
-    @Override
     public String toString() {
         return "Mapa{" +
                 "idMapa='" + idMapa + '\'' +

@@ -1,11 +1,4 @@
-/**
- * 
- */
 package PROJ26E4;
-
-/**
- * 
- */
 import java.time.LocalDate;
 
 enum Prioridade{
@@ -14,6 +7,7 @@ enum Prioridade{
 	Baixa	
 }
 public class Ocorrencia {
+	private static int proximoId = 1;
 	private String idOcorrencia;
 	private String titulo;
 	private String descricao;
@@ -24,8 +18,9 @@ public class Ocorrencia {
 	private String piso;
 	private String local;
 	
-	public Ocorrencia(String idOcorrencia , String titulo,String descricao,LocalDate dataCriacao,Prioridade prioridades,EstadoOcorrencia estadoInicial,String bloco,String piso,String local) {
-		this.idOcorrencia=idOcorrencia;
+	public Ocorrencia(String titulo,String descricao,LocalDate dataCriacao,Prioridade prioridades,EstadoOcorrencia estadoInicial,String bloco,String piso,String local) {
+		this.idOcorrencia = String.valueOf(proximoId);
+		proximoId++;
 		this.titulo=titulo;
 		this.descricao=descricao;
 		this.dataCriacao=dataCriacao;
