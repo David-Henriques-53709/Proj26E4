@@ -31,9 +31,11 @@ public class CategoriaOcorrencia {
 	public void setDescricao(String descricao) {
 		this.descricao=descricao;
 		}
-		@Override
 	public String toString() {
-			return "CategoriaOcorrencia [idCategoria=" + idCategoria + ", nomeCategoria=" + nomeCategoria + ", descricao="
-					+ descricao + "]";
-}
+	    return "\n==============================" +
+	           "\nID Categoria : " + idCategoria +
+	           "\nNome         : " + nomeCategoria +
+	           "\nDescrição    : " + descricao +
+	           "\n==============================";
+	}
 }

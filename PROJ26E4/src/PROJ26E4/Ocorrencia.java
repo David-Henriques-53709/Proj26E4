@@ -11,8 +11,7 @@ import java.time.LocalDate;
 enum Prioridade{
 	Alta,
 	Média,
-	Baixa
-	
+	Baixa	
 }
 public class Ocorrencia {
 	private String idOcorrencia;
@@ -21,13 +20,20 @@ public class Ocorrencia {
 	private LocalDate dataCriacao;
 	private Prioridade prioridades;
 	private EstadoOcorrencia estadoAtual;
-	public Ocorrencia(String idOcorrencia , String titulo,String descricao,LocalDate dataCriacao,Prioridade prioridades,EstadoOcorrencia estadoInicial) {
+	private String bloco;
+	private String piso;
+	private String local;
+	
+	public Ocorrencia(String idOcorrencia , String titulo,String descricao,LocalDate dataCriacao,Prioridade prioridades,EstadoOcorrencia estadoInicial,String bloco,String piso,String local) {
 		this.idOcorrencia=idOcorrencia;
 		this.titulo=titulo;
 		this.descricao=descricao;
 		this.dataCriacao=dataCriacao;
 		this.prioridades=prioridades;
 		this.estadoAtual=estadoInicial;
+		this.bloco = bloco;
+		this.piso = piso;
+		this.local = local;
  	}
 	public String getIdOcorrencia() {
 		return idOcorrencia;	
@@ -64,10 +70,16 @@ public class Ocorrencia {
         }
 	}
 	public String toString() {
-		return "Ocorrencia [idOcorrencia=" + idOcorrencia + ", titulo=" + titulo + ", descricao=" + descricao
-				+ ", dataCriacao=" + dataCriacao + ", prioridades=" + prioridades + ", getIdOcorrencia()="
-				+ getIdOcorrencia() + ", getTitulo()=" + getTitulo() + ", getDescricao()=" + getDescricao()
-				+ ", getDataCriacao()=" + getDataCriacao() + ", getPrioridades()=" + getPrioridades() + ", getClass()="
-				+ getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
-	}	
+	    return "\n==================================" +
+	           "\nID Ocorrência : " + idOcorrencia +
+	           "\nTítulo        : " + titulo +
+	           "\nDescrição     : " + descricao +
+	           "\nData Criação  : " + dataCriacao +
+	           "\nPrioridade    : " + prioridades +
+	           "\nEstado Atual  : " + estadoAtual +
+	           "\nBloco         : " + bloco +
+	           "\nPiso          : " + piso +
+	           "\nLocal         : " + local +
+	           "\n==================================";
+	}
  }
