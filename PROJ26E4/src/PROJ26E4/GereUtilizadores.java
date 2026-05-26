@@ -5,7 +5,7 @@ public class GereUtilizadores {
 	public GereUtilizadores() {
 			utilizadores = new ArrayList<>();
 	}
-//criar utilizador
+	//criar utilizador
 	public void criarUtilizador(Utilizador u) {
 		utilizadores.add(u);
 		System.out.println("O utilizador foi criado com sucesso!");
