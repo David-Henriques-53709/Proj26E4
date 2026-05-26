@@ -13,6 +13,22 @@ public class Piso {
 		this.idBloco = idBloco;
 	}
 	
+	public String getIdPiso() {
+		return idPiso;
+	}
+	
+	public int getNumPiso() {
+		return numPiso;
+	}
+	
+	public String getDescricao() {
+		return descricao;
+	}
+	
+	public String getIdBloco() {
+		return idBloco;
+	}
+	
 	public void mostrarOcorrencias() {
 		System.out.println("Ocorrências do piso: "  + numPiso);
 	}
