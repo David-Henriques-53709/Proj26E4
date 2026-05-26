@@ -35,7 +35,7 @@ public class Mapa {
 	
     public void mostrarMapa() {
         System.out.println("==========================================");
-        System.out.println("               MAPA:  " + nomeMapa);
+        System.out.println("               MAPA: " + nomeMapa);
         System.out.println("==========================================");
         System.out.println("ID       : " + idMapa);
         System.out.println("Nome     : " + nomeMapa);
