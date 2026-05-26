@@ -27,7 +27,7 @@ public class Estacionamento {
 
 	public String toString() {
 	    return "ID Estacionamento: " + idEstacionamento +
-	           " | Lugares: " + numeroLugares +
-	           " | Tipo: " + tipoEstacionamento;
+	           "\nLugares: " + numeroLugares +
+	           "\nTipo: " + tipoEstacionamento;
 	}
 }

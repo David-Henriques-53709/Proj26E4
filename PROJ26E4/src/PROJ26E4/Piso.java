@@ -32,9 +32,11 @@ public class Piso {
 	public void mostrarOcorrencias() {
 		System.out.println("Ocorrências do piso: "  + numPiso);
 	}
-	
-	@Override
+
 	public String toString() {
-		return "Piso:" + numPiso + "|ID do Piso:" + idPiso + "| Bloco em que se encontra: " + idBloco + "| Descrição: " + descricao;
+		return "Piso:"+numPiso+
+				"\nID do Piso: "+idPiso+
+				"\nBloco em que se encontra: "+idBloco+
+				"\nDescrição: "+descricao;
 	}
 }

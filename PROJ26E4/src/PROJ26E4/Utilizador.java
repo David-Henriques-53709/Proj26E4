@@ -63,12 +63,15 @@ public class Utilizador {
     public void criarOcorrencia(String idOcorrencia,
                                 String titulo,
                                 String descricao,
-                                Prioridade prioridade) {
+                                Prioridade prioridade,
+                                String bloco,
+                                String piso,
+                                String local) {
 
         // estado inicial automático
         EstadoOcorrencia estadoInicial = new EstadoOcorrencia(
                 "EST-01",
-                "Aberta",
+                "Por Resolver",
                 "Ocorrência criada pelo utilizador",
                 LocalDate.now()
         );
@@ -80,11 +83,12 @@ public class Utilizador {
                 descricao,
                 LocalDate.now(),
                 prioridade,
-                estadoInicial
+                estadoInicial,
+                bloco,
+                piso,
+                local
         );
-
         ocorrencias.add(novaOcorrencia);
-
         System.out.println("Ocorrência '" + titulo +
                 "' criada com sucesso pelo utilizador: " + nome);
     }
@@ -106,13 +110,12 @@ public class Utilizador {
     }
 
     public String toString() {
-
-        return "Utilizador{" +
-                "idUtilizador='" + idUtilizador + '\'' +
-                ", nome='" + nome + '\'' +
-                ", email='" + email + '\'' +
-                ", tipoUtilizador='" + tipoUtilizador + '\'' +
-                ", totalOcorrencias=" + ocorrencias.size() +
-                '}';
+        return "\n==============================" +
+               "\nID Utilizador   : " + idUtilizador +
+               "\nNome            : " + nome +
+               "\nEmail           : " + email +
+               "\nTipo Utilizador : " + tipoUtilizador +
+               "\nOcorrências     : " + ocorrencias.size() +
+               "\n==============================";
     }
 }

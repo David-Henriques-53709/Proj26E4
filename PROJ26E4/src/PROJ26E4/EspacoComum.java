@@ -32,8 +32,8 @@ public class EspacoComum {
 	}
 	public String toString() {
 	    return "ID Espaço: " + idEspacoComum +
-	           " | Nome: " + nomeEspaco +
-	           " | Descrição: " + descricaoEspaco +
-	           " | Capacidade: " + capacidadeMaxima;
+	           "\nNome: " + nomeEspaco +
+	           "\nDescrição: " + descricaoEspaco +
+	           "\nCapacidade: " + capacidadeMaxima;
 	}
  }

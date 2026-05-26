@@ -66,10 +66,6 @@ public class EstadoOcorrencia {
 		this.dataAtualizacao = dataAtualizacao;
 	}
 	public String toString() {
-		return "Estado da Ocorrência: "+
-				"\nIdEstado= "+idEstado+
-				"\nNome Estado: "+nomeEstado+
-				"\nDescrição do estado: "+descricaoEstado+
-				"\nData de atualização: "+dataAtualizacao;
+		return nomeEstado;
 	}
 }

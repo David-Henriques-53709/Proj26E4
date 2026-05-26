@@ -30,7 +30,8 @@ public class Bloco {
 	}
 	
 	public String toString() {
-		return "ID do Bloco:" + idBloco + "| Nome do Bloco: " + nomeBloco + "| Descrição: " + descricao;
+		return "ID do Bloco:" +idBloco+
+				"Nome do Bloco: "+nomeBloco+
+				"Descrição: "+descricao;
 	}
 }
-

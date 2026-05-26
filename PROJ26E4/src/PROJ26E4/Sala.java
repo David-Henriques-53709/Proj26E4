@@ -32,6 +32,11 @@ public class Sala {
 	}
 
 	public String toString() {
-    	return " Sala " + idSala + nomeSala + " com capacidade para " + capacidade + " do tipo " + tipoSala + ".";
-    }
+	    return "\n==============================" +
+	           "\nID Sala     : " + idSala +
+	           "\nNome Sala   : " + nomeSala +
+	           "\nCapacidade  : " + capacidade +
+	           "\nTipo Sala   : " + tipoSala +
+	           "\n==============================";
+	}
 }
