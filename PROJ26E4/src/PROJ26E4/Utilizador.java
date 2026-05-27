@@ -42,6 +42,9 @@ public class Utilizador {
     public List<Ocorrencia> getOcorrencias() {
         return ocorrencias;
     }
+    public String getId() {
+        return idUtilizador;
+    }
 
     public void criarOcorrencia(String titulo,
                                 String descricao,

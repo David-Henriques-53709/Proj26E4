@@ -37,9 +37,9 @@ public class Teste {
 	    System.out.println("\n=======================================================\n");
 	}
     public static void menu() {
-        System.out.println("\n==================================================");
-        System.out.println("        SISTEMA DE GESTÃO DE OCORRÊNCIAS");
-        System.out.println("==================================================");
+        System.out.println("\n=======================================================");
+        System.out.println("        SISTEMA DE COMUNICAÇÃO DE OCORRÊNCIAS NA UPT");
+        System.out.println("=======================================================");
         System.out.println("1 - Criar Utilizador");
         System.out.println("2 - Mostrar Utilizadores");
         System.out.println("3 - Criar Ocorrência");
@@ -74,7 +74,7 @@ public class Teste {
                     String email = sc.nextLine();
                     System.out.print("Password: ");
                     String password = sc.nextLine();
-                    System.out.print("Tipo de Utilizador (Aluno | Docente | Administrador | Funcionário): ");
+                    System.out.print("Tipo de Utilizador ( Aluno | Docente | Administrador | Funcionário ): ");
                     String tipo = sc.nextLine();
                     utilizadorAtual = new Utilizador(
                             id,
@@ -110,16 +110,18 @@ public class Teste {
                     System.out.print("Descrição: ");
                     String descricao = sc.nextLine();
                     System.out.println("\nBLOCOS:");
-                    System.out.println("1 - Bloco 1");
-                    System.out.println("2 - Bloco 2");
+                    System.out.println("1 - Bloco Principal");
+                    System.out.println("2 - Bloco São Tomé");
                     System.out.print("Escolha o bloco: ");
                     int blocoEscolha = sc.nextInt();
                     sc.nextLine();
                     String bloco = "Bloco " + blocoEscolha;
                     int maxPisos;
                     if(blocoEscolha == 1) {
+                    	bloco = "Bloco Principal";
                         maxPisos = 6;
                     } else {
+                    	bloco = "Bloco São Tomé";
                         maxPisos = 2;
                     }
                     System.out.println("\nPISOS:");
@@ -130,7 +132,8 @@ public class Teste {
                     int pisoEscolha = sc.nextInt();
                     sc.nextLine();
                     String piso = "Piso " + pisoEscolha;
-                    System.out.println("\nLOCAL:");
+                    int localEscolha;
+                    String local = "";
                     if(blocoEscolha == 1) {
                         if(pisoEscolha <= 3) {
                             System.out.println("1 - Sala");
@@ -140,28 +143,19 @@ public class Teste {
                             System.out.println("1 - Sala");
                             System.out.println("2 - Espaço Comum");
                         }
-                    } else {
-                        if(pisoEscolha == 1) {
-                            System.out.println("1 - Estacionamento");
-                            System.out.println("2 - Espaço Comum");
-                        } else {
-                            System.out.println("1 - Sala");
-                        }
-                    }
-                    System.out.print("Escolha: ");
-                    int localEscolha = sc.nextInt();
-                    sc.nextLine();
-                    String local = "";
-                    if(localEscolha == 1) {
-                        System.out.print("Número da sala (1-21): ");
-                        int numeroSala = sc.nextInt();
+                        System.out.print("Escolha: ");
+                        localEscolha = sc.nextInt();
                         sc.nextLine();
-                        local = "Sala " + pisoEscolha + numeroSala;
-                    } else if(localEscolha == 2) {
-                        local = "Estacionamento";
-                    } else {
-                        System.out.println("\n===== ESPAÇOS COMUNS =====");
-                        if(blocoEscolha == 1) {
+                        if(localEscolha == 1) {
+                            System.out.print("Número da sala (1-21): ");
+                            int numeroSala = sc.nextInt();
+                            sc.nextLine();
+                            local = "Sala " + pisoEscolha + numeroSala;
+                        }
+                        else if(localEscolha == 2 && pisoEscolha <= 3) {
+                            local = "Estacionamento";
+                        }
+                        else {
                             if(pisoEscolha == 1) {
                                 System.out.println("1 - Biblioteca");
                                 System.out.println("2 - Secretaria");
@@ -172,41 +166,41 @@ public class Teste {
                                 int espaco = sc.nextInt();
                                 sc.nextLine();
                                 switch(espaco) {
-                                    case 1:
-                                        local = "Biblioteca";
-                                        break;
-                                    case 2:
-                                        local = "Secretaria";
-                                        break;
-                                    case 3:
-                                        local = "Papelaria";
-                                        break;
-                                    case 4:
-                                        local = "Corredor";
-                                        break;
-                                    case 5:
-                                        local = "Espelho de Água";
-                                        break;
+                                    case 1: local = "Biblioteca"; break;
+                                    case 2: local = "Secretaria"; break;
+                                    case 3: local = "Papelaria"; break;
+                                    case 4: local = "Corredor"; break;
+                                    case 5: local = "Espelho de Água"; break;
                                 }
-                            }
-                            else if(pisoEscolha == 2) {
+                            } else if(pisoEscolha == 2) {
                                 System.out.println("1 - Bar");
-                                System.out.println("2 - Corredor");
+                                System.out.println("2 - Esplanada");
+                                System.out.println("3 - Corredor");                                 
                                 System.out.print("Escolha: ");
                                 int espaco = sc.nextInt();
                                 sc.nextLine();
                                 if(espaco == 1) {
                                     local = "Bar";
+                                } else if( espaco == 2){
+                                    local = "Esplanada";
                                 } else {
-                                    local = "Corredor";
+                                	local = "Corredor";
                                 }
-                            }
-                            else {
+                            } else {
                                 local = "Corredor";
                             }
                         }
-                        else {
-                            if(pisoEscolha == 1) {
+                    } else {//bloco são tomé
+                        if(pisoEscolha == 1) {
+                            System.out.println("1 - Estacionamento");
+                            System.out.println("2 - Espaço Comum");
+                            System.out.print("Escolha: ");
+                            localEscolha = sc.nextInt();
+                            sc.nextLine();
+                            if(localEscolha == 1) {
+                                local = "Estacionamento";
+                            }
+                            else {
                                 System.out.println("1 - Cantina");
                                 System.out.println("2 - Sala de Estudo");
                                 System.out.println("3 - Corredor");
@@ -214,18 +208,28 @@ public class Teste {
                                 int espaco = sc.nextInt();
                                 sc.nextLine();
                                 switch(espaco) {
-                                    case 1:
-                                        local = "Cantina";
-                                        break;
-                                    case 2:
-                                        local = "Sala de Estudo";
-                                        break;
-                                    case 3:
-                                        local = "Corredor";
-                                        break;
+                                    case 1: local = "Cantina"; break;
+                                    case 2: local = "Sala de Estudo"; break;
+                                    case 3: local = "Corredor"; break;
                                 }
                             }
-                            else {
+                        } else {
+                            System.out.println("1 - Sala");
+                            System.out.println("2 - Espaço Comum");
+                            System.out.print("Escolha: ");
+                            localEscolha = sc.nextInt();
+                            sc.nextLine();
+                            if(localEscolha == 1) {
+                                System.out.print("Número da sala (750-755): ");
+                                int numeroSala = sc.nextInt();
+                                sc.nextLine();
+                                if(numeroSala >= 750 && numeroSala <= 755) {
+                                    local = "Sala " + numeroSala;
+                                } else {
+                                    System.out.println("Sala inválida!");
+                                    local = "Sala Desconhecida";
+                                }
+                            } else {
                                 local = "Corredor";
                             }
                         }
@@ -259,25 +263,46 @@ public class Teste {
                     break;
 
                 case 4:
-                    if (utilizadorAtual == null) {
-                        System.out.println("\nNenhum utilizador criado.");
+                	if (sistema.getUtilizadores().isEmpty()) {
+                        System.out.println("\nNenhum utilizador foi criado.");
                         break;
                     }
                     System.out.println("\n========== OCORRÊNCIAS ==========");
-                    utilizadorAtual.consultarOcorrencia();
+                    for (Utilizador u : sistema.getUtilizadores()) {
+                        System.out.println("\nUtilizador: " + u.getNome());
+                        if (u.getOcorrencias().isEmpty()) {
+                            System.out.println("Sem ocorrências.");
+                        } else {
+                            u.consultarOcorrencia();
+                        }
+                    }
                     break;
 
                 case 5:
-                    if (utilizadorAtual == null ||
-                        utilizadorAtual.getOcorrencias().isEmpty()) {
-                        System.out.println("\nNão existem ocorrências.");
+                    if (sistema.getUtilizadores().isEmpty()) {
+                        System.out.println("\nNão existem utilizadores.");
+                        break;
+                    }
+                    System.out.println("\n===== UTILIZADORES =====");
+                    for (int i = 0; i < sistema.getUtilizadores().size(); i++) {
+                        System.out.println(
+                            (i + 1) + " - " +
+                            sistema.getUtilizadores().get(i).getNome()
+                        );
+                    }
+                    System.out.print("Escolha o utilizador: ");
+                    int userEscolha = sc.nextInt();
+                    sc.nextLine();
+                    utilizadorAtual =sistema.getUtilizadores().get(userEscolha - 1);
+                    if (utilizadorAtual.getOcorrencias().isEmpty()) {
+                        System.out.println("\nEsse utilizador não tem ocorrências.");
                         break;
                     }
                     System.out.println("\n===== OCORRÊNCIAS =====");
                     for (int i = 0; i < utilizadorAtual.getOcorrencias().size(); i++) {
                         System.out.println(
-                                (i + 1) + " - " +
-                                utilizadorAtual.getOcorrencias().get(i).getTitulo()
+                            (i + 1) + " - " +
+                            utilizadorAtual.getOcorrencias().get(i).getTitulo()
                         );
                     }
                     System.out.print("\nEscolha a ocorrência: ");
@@ -292,38 +317,48 @@ public class Teste {
                     sc.nextLine();
                     EstadoOcorrencia novoEstado;
                     if (estado == 1) {
-
                         novoEstado = new EstadoOcorrencia(
-                                "EST-01",
-                                "Por Resolver",
-                                "Ocorrência Por Resolver",
-                                LocalDate.now()
+                            "EST-01",
+                            "Por Resolver",
+                            "Ocorrência Por Resolver",
+                            LocalDate.now()
                         );
                     } else if (estado == 2) {
                         novoEstado = new EstadoOcorrencia(
-                                "EST-02",
-                                "Em Progresso",
-                                "Ocorrência em progresso",
-                                LocalDate.now()
+                            "EST-02",
+                            "Em Progresso",
+                            "Ocorrência em progresso",
+                            LocalDate.now()
                         );
                     } else {
                         novoEstado = new EstadoOcorrencia(
-                                "EST-03",
-                                "Concluída",
-                                "Ocorrência concluída",
-                                LocalDate.now()
+                            "EST-03",
+                            "Concluída",
+                            "Ocorrência concluída",
+                            LocalDate.now()
                         );
                     }
-                    sistema.atualizarEstadoOcorrencia(
-                            ocorrencia,
-                            novoEstado
-                    );
+                    sistema.atualizarEstadoOcorrencia(ocorrencia,novoEstado);
                     break;
 
                 case 6:
-                    System.out.print("\nID do utilizador a remover: ");
-                    String idRemover = sc.nextLine();
-                    sistema.removerUtilizador(idRemover);
+                    if (sistema.getUtilizadores().isEmpty()) {
+                        System.out.println("\nNão existem utilizadores.");
+                        break;
+                    }
+                    System.out.println("\n===== UTILIZADORES =====");
+                    for (int i = 0; i < sistema.getUtilizadores().size(); i++) {
+                        System.out.println(
+                            (i + 1) + " - " +
+                            sistema.getUtilizadores().get(i).getNome()
+                        );
+                    }
+                    System.out.print("Escolha o utilizador a remover: ");
+                    int removerEscolha = sc.nextInt();
+                    sc.nextLine();
+                    Utilizador utilizadorRemover =sistema.getUtilizadores().get(removerEscolha - 1);
+                    sistema.removerUtilizador(utilizadorRemover.getId());
+                    System.out.println("\nUtilizador removido com sucesso!");
                     break;
 
                 case 0:
