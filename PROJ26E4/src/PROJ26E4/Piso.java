@@ -6,7 +6,7 @@ public class Piso {
 	private String descricao;
 	private String idBloco;
 	
-	public Piso(String idPiso, int numPiso, String descricao, String idbloco) {
+	public Piso(String idPiso, int numPiso, String descricao, String idBloco) {
 		this.idPiso = idPiso;
 		this.numPiso = numPiso;
 		this.descricao = descricao;
