@@ -26,9 +26,9 @@ public class Ocorrencia {
 		this.dataCriacao=dataCriacao;
 		this.prioridades=prioridades;
 		this.estadoAtual=estadoInicial;
-		this.bloco = bloco;
-		this.piso = piso;
-		this.local = local;
+		this.bloco=bloco;
+		this.piso=piso;
+		this.local=local;
  	}
 	public String getIdOcorrencia() {
 		return idOcorrencia;	

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Utilizador {
-	
     private String idUtilizador;
     private String nome;
     private String email;
@@ -21,7 +20,7 @@ public class Utilizador {
         this.nome = nome;
         this.email = email;
         this.password = password;
-        this.tipoUtilizador = tipoUtlizador(this.email) ;
+        this.tipoUtilizador = buscarTipoUtilizador(this.email) ;
         this.ocorrencias = new ArrayList<>();
     }
     public String getIdUtilizador() {
@@ -48,7 +47,6 @@ public class Utilizador {
     public void setTipoUtilizador(
             String tipoUtilizador
     ) {
-
         this.tipoUtilizador = tipoUtilizador;
     }
 
@@ -65,7 +63,6 @@ public class Utilizador {
                 "Ocorrência criada pelo utilizador",
                 LocalDate.now()
         );
-
         Ocorrencia novaOcorrencia = new Ocorrencia(
                 titulo,
                 descricao,
@@ -94,66 +91,36 @@ public class Utilizador {
     }
     
     public void cancelarOcorrencia(int indice) {
-
         if(indice < 0 || indice >= ocorrencias.size()) {
             System.out.println("Ocorrência inválida!");
             return;
         }
-
         Ocorrencia ocorrencia = ocorrencias.get(indice);
-
-        if(!ocorrencia.getEstadoAtual().getNomeEstado()
-                .equals("Por Resolver")) {
-
-            System.out.println(
-                "Só pode cancelar ocorrências Por Resolver!"
-            );
-
+        if(!ocorrencia.getEstadoAtual().getNomeEstado().equals("Por Resolver")) {
+            System.out.println("Só pode cancelar ocorrências Por Resolver!");
             return;
         }
-
         ocorrencias.remove(indice);
-
-        System.out.println(
-            "Ocorrência cancelada com sucesso!"
+        System.out.println("Ocorrência cancelada com sucesso!"
         );
     }
     
-    public String tipoUtilizador(String email) {
-
-
-	    // ADMIN
-	    if(email.equalsIgnoreCase("admin@upt.pt")) {
-
+    public String buscarTipoUtilizador(String email) {
+	    if(email.endsWith("@admin.upt.pt")) {
 	        return "Administrador";
-
 	    }
-
-	    // ALUNO
 	    else if(email.endsWith("@alunos.upt.pt")) {
-
 	        return "Aluno";
-
 	    }
-
-	    // DOCENTE/FUNCIONÁRIO
 	    else if(email.endsWith("@upt.pt")) {
-
-	        return "Funcionário/Docente"
-	        );
-
+	        return "Funcionário|Docente";
 	    }
-
 	    else {
-
-	        System.out.println(
-	            "Email institucional inválido!"
-	        );
-
+	        System.out.println("Email institucional inválido!");
 	        return null;
 	    }
-
 	}
+    
     public String toString() {
         return "\n==============================" +
                "\nID Utilizador   : " + idUtilizador +
