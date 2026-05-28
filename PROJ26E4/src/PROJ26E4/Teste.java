@@ -46,8 +46,7 @@ public class Teste {
         System.out.println("4 - Consultar Ocorrências");
         System.out.println("5 - Atualizar Estado da Ocorrência");
         System.out.println("6 - Cancelar Ocorrência");
-        System.out.println("7 - Login");
-        System.out.println("8 - Remover Utilizador");
+        System.out.println("7 - Remover Utilizador");
         System.out.println("0 - Sair");
         System.out.println("==================================================");
         System.out.print("Escolha uma opção: ");
@@ -224,129 +223,44 @@ public class Teste {
                     break;
                     
                 case 6:
-
                     if(sistema.getUtilizadores().isEmpty()) {
-
-                        System.out.println(
-                            "\nNão existem utilizadores."
-                        );
-
+                        System.out.println("\nNão existem utilizadores.");
                         break;
                     }
-
                     System.out.println("\n===== UTILIZADORES =====");
-
-                    for(int i = 0;
-                        i < sistema.getUtilizadores().size();
-                        i++) {
-
-                        System.out.println(
-                            (i + 1) + " - " +
-                            sistema.getUtilizadores().get(i).getNome()
-                        );
+                    for(int i = 0;i < sistema.getUtilizadores().size();i++) {
+                        System.out.println((i + 1) + " - " +sistema.getUtilizadores().get(i).getNome());
                     }
-
                     System.out.print("Escolha o utilizador: ");
-
                     int userCancelar = sc.nextInt();
                     sc.nextLine();
-
-                    utilizadorAtual =
-                        sistema.getUtilizadores().get(userCancelar - 1);
-
+                    utilizadorAtual =sistema.getUtilizadores().get(userCancelar - 1);
                     if(utilizadorAtual.getOcorrencias().isEmpty()) {
-
-                        System.out.println(
-                            "\nEsse utilizador não tem ocorrências."
-                        );
-
+                        System.out.println("\nO utilizador não tem ocorrências.");
                         break;
                     }
-
                     System.out.println("\n===== OCORRÊNCIAS =====");
-
-                    for(int i = 0;
-                        i < utilizadorAtual.getOcorrencias().size();
-                        i++) {
-
-                        System.out.println(
-                            (i + 1) + " - " +
-                            utilizadorAtual.getOcorrencias()
-                            .get(i).getTitulo()
-                        );
+                    for(int i = 0;i < utilizadorAtual.getOcorrencias().size();i++) {
+                        System.out.println((i + 1) + " - " +utilizadorAtual.getOcorrencias().get(i).getTitulo());
                     }
-
-                    System.out.print(
-                        "\nEscolha a ocorrência a cancelar: "
-                    );
-
+                    System.out.print("\nEscolha a ocorrência a cancelar: ");
                     int cancelar = sc.nextInt();
                     sc.nextLine();
-
-                    Ocorrencia ocorrenciaCancelar =
-                        utilizadorAtual.getOcorrencias()
-                        .get(cancelar - 1);
-
-                    if(!ocorrenciaCancelar.getEstadoAtual()
-                            .getNomeEstado()
-                            .equals("Por Resolver")) {
-
-                        System.out.println(
-                            "Só pode cancelar ocorrências Por Resolver!"
-                        );
-
+                    Ocorrencia ocorrenciaCancelar =utilizadorAtual.getOcorrencias().get(cancelar - 1);
+                    if(!ocorrenciaCancelar.getEstadoAtual().getNomeEstado().equals("Por Resolver")) {
+                        System.out.println("Só pode cancelar ocorrências Por Resolver!");
                         break;
                     }
-
-                    System.out.print(
-                        "Tem a certeza? (s/n): "
-                    );
-
+                    System.out.print("Tem a certeza? (sim | não): ");
                     String confirmacao = sc.nextLine();
-
-                    if(confirmacao.equalsIgnoreCase("s")) {
-
+                    if(confirmacao.equalsIgnoreCase("sim")) {
                         utilizadorAtual.cancelarOcorrencia(cancelar - 1);
-
                     } else {
-
-                        System.out.println(
-                            "Cancelamento abortado."
-                        );
+                        System.out.println("Cancelamento cancelado.");
                     }
-
                     break;
+   
                 case 7:
-                    System.out.println(
-                            "\n========== LOGIN =========="
-                        );
-
-                        System.out.print("Email: ");
-
-                        String emailLogin =
-                            sc.nextLine();
-
-                        System.out.print("Password: ");
-
-                        String passwordLogin =
-                            sc.nextLine();
-
-                        utilizadorAtual =
-                            sistema.login(
-                                emailLogin,
-                                passwordLogin
-                            );
-
-                        if(utilizadorAtual != null) {
-
-                            System.out.println(
-                                "\nBem-vindo " +
-                                utilizadorAtual.getNome()
-                            );
-                        }
-
-                        break;
-                case 8:
                     if (sistema.getUtilizadores().isEmpty()) {
                         System.out.println("\nNão existem utilizadores.");
                         break;
