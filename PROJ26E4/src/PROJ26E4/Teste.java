@@ -98,142 +98,24 @@ public class Teste {
                     }
                     System.out.println("\n===== UTILIZADORES =====");
                     for (int i = 0; i < sistema.getUtilizadores().size(); i++) {
-                        System.out.println((i + 1) + " - " +sistema.getUtilizadores().get(i).getNome());
+                        System.out.println((i + 1) + " - " +
+                        sistema.getUtilizadores().get(i).getNome());
                     }
                     System.out.print("Escolha o utilizador: ");
                     int utilizadorEscolha = sc.nextInt();
                     sc.nextLine();
-                    utilizadorAtual =sistema.getUtilizadores().get(utilizadorEscolha - 1);
+                    utilizadorAtual = sistema.getUtilizadores().get(utilizadorEscolha - 1);
                     System.out.println("\n========== CRIAR OCORRÊNCIA ==========");
                     System.out.print("Título: ");
                     String titulo = sc.nextLine();
                     System.out.print("Descrição: ");
                     String descricao = sc.nextLine();
-                    System.out.println("\nBLOCOS:");
-                    System.out.println("1 - Bloco Principal");
-                    System.out.println("2 - Bloco São Tomé");
-                    System.out.print("Escolha o bloco: ");
-                    int blocoEscolha = sc.nextInt();
-                    sc.nextLine();
-                    String bloco = "Bloco " + blocoEscolha;
-                    int maxPisos;
-                    if(blocoEscolha == 1) {
-                    	bloco = "Bloco Principal";
-                        maxPisos = 6;
-                    } else {
-                    	bloco = "Bloco São Tomé";
-                        maxPisos = 2;
-                    }
-                    System.out.println("\nPISOS:");
-                    for(int i = 1; i <= maxPisos; i++) {
-                        System.out.println(i + " - Piso " + i);
-                    }
-                    System.out.print("Escolha o piso: ");
-                    int pisoEscolha = sc.nextInt();
-                    sc.nextLine();
-                    String piso = "Piso " + pisoEscolha;
-                    int localEscolha;
-                    String local = "";
-                    if(blocoEscolha == 1) {
-                        if(pisoEscolha <= 3) {
-                            System.out.println("1 - Sala");
-                            System.out.println("2 - Estacionamento");
-                            System.out.println("3 - Espaço Comum");
-                        } else {
-                            System.out.println("1 - Sala");
-                            System.out.println("2 - Espaço Comum");
-                        }
-                        System.out.print("Escolha: ");
-                        localEscolha = sc.nextInt();
-                        sc.nextLine();
-                        if(localEscolha == 1) {
-                            System.out.print("Número da sala (1-21): ");
-                            int numeroSala = sc.nextInt();
-                            sc.nextLine();
-                            local = "Sala " + pisoEscolha + numeroSala;
-                        }
-                        else if(localEscolha == 2 && pisoEscolha <= 3) {
-                            local = "Estacionamento";
-                        }
-                        else {
-                            if(pisoEscolha == 1) {
-                                System.out.println("1 - Biblioteca");
-                                System.out.println("2 - Secretaria");
-                                System.out.println("3 - Papelaria");
-                                System.out.println("4 - Corredor");
-                                System.out.println("5 - Espelho de Água");
-                                System.out.print("Escolha: ");
-                                int espaco = sc.nextInt();
-                                sc.nextLine();
-                                switch(espaco) {
-                                    case 1: local = "Biblioteca"; break;
-                                    case 2: local = "Secretaria"; break;
-                                    case 3: local = "Papelaria"; break;
-                                    case 4: local = "Corredor"; break;
-                                    case 5: local = "Espelho de Água"; break;
-                                }
-                            } else if(pisoEscolha == 2) {
-                                System.out.println("1 - Bar");
-                                System.out.println("2 - Esplanada");
-                                System.out.println("3 - Corredor");                                 
-                                System.out.print("Escolha: ");
-                                int espaco = sc.nextInt();
-                                sc.nextLine();
-                                if(espaco == 1) {
-                                    local = "Bar";
-                                } else if( espaco == 2){
-                                    local = "Esplanada";
-                                } else {
-                                	local = "Corredor";
-                                }
-                            } else {
-                                local = "Corredor";
-                            }
-                        }
-                    } else {//bloco são tomé
-                        if(pisoEscolha == 1) {
-                            System.out.println("1 - Estacionamento");
-                            System.out.println("2 - Espaço Comum");
-                            System.out.print("Escolha: ");
-                            localEscolha = sc.nextInt();
-                            sc.nextLine();
-                            if(localEscolha == 1) {
-                                local = "Estacionamento";
-                            }
-                            else {
-                                System.out.println("1 - Cantina");
-                                System.out.println("2 - Sala de Estudo");
-                                System.out.println("3 - Corredor");
-                                System.out.print("Escolha: ");
-                                int espaco = sc.nextInt();
-                                sc.nextLine();
-                                switch(espaco) {
-                                    case 1: local = "Cantina"; break;
-                                    case 2: local = "Sala de Estudo"; break;
-                                    case 3: local = "Corredor"; break;
-                                }
-                            }
-                        } else {
-                            System.out.println("1 - Sala");
-                            System.out.println("2 - Espaço Comum");
-                            System.out.print("Escolha: ");
-                            localEscolha = sc.nextInt();
-                            sc.nextLine();
-                            if(localEscolha == 1) {
-                                System.out.print("Número da sala (750-755): ");
-                                int numeroSala = sc.nextInt();
-                                sc.nextLine();
-                                if(numeroSala >= 750 && numeroSala <= 755) {
-                                    local = "Sala " + numeroSala;
-                                } else {
-                                    System.out.println("Sala inválida!");
-                                    local = "Sala Desconhecida";
-                                }
-                            } else {
-                                local = "Corredor";
-                            }
-                        }
-                    }
+                    Mapa mapa = new Mapa();
+                    String localizacao = mapa.escolherLocal(sc);
+                    String[] partes = localizacao.split(" - ");
+                    String bloco = partes[0];
+                    String piso = partes[1];
+                    String local = partes[2];
                     System.out.println("\nPrioridade:");
                     System.out.println("1 - Alta");
                     System.out.println("2 - Media");
