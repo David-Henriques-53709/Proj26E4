@@ -16,12 +16,12 @@ public class Utilizador {
         this.ocorrencias = new ArrayList<>();
     }
 
-    public Utilizador(String idUtilizador,String nome,String email,String password,String tipoUtilizador) {
+    public Utilizador(String idUtilizador,String nome,String email,String password) {
         this.idUtilizador = idUtilizador;
         this.nome = nome;
         this.email = email;
         this.password = password;
-        this.tipoUtilizador = tipoUtilizador;
+        this.tipoUtilizador = tipoUtlizador(this.email) ;
         this.ocorrencias = new ArrayList<>();
     }
     public String getIdUtilizador() {
@@ -44,6 +44,12 @@ public class Utilizador {
     }
     public String getId() {
         return idUtilizador;
+    }
+    public void setTipoUtilizador(
+            String tipoUtilizador
+    ) {
+
+        this.tipoUtilizador = tipoUtilizador;
     }
 
     public void criarOcorrencia(String titulo,
@@ -112,6 +118,42 @@ public class Utilizador {
             "Ocorrência cancelada com sucesso!"
         );
     }
+    
+    public String tipoUtilizador(String email) {
+
+
+	    // ADMIN
+	    if(email.equalsIgnoreCase("admin@upt.pt")) {
+
+	        return "Administrador";
+
+	    }
+
+	    // ALUNO
+	    else if(email.endsWith("@alunos.upt.pt")) {
+
+	        return "Aluno";
+
+	    }
+
+	    // DOCENTE/FUNCIONÁRIO
+	    else if(email.endsWith("@upt.pt")) {
+
+	        return "Funcionário/Docente"
+	        );
+
+	    }
+
+	    else {
+
+	        System.out.println(
+	            "Email institucional inválido!"
+	        );
+
+	        return null;
+	    }
+
+	}
     public String toString() {
         return "\n==============================" +
                "\nID Utilizador   : " + idUtilizador +

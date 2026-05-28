@@ -46,7 +46,8 @@ public class Teste {
         System.out.println("4 - Consultar Ocorrências");
         System.out.println("5 - Atualizar Estado da Ocorrência");
         System.out.println("6 - Cancelar Ocorrência");
-        System.out.println("7 - Remover Utilizador");
+        System.out.println("7 - Login");
+        System.out.println("8 - Remover Utilizador");
         System.out.println("0 - Sair");
         System.out.println("==================================================");
         System.out.print("Escolha uma opção: ");
@@ -75,14 +76,12 @@ public class Teste {
                     String email = sc.nextLine();
                     System.out.print("Password: ");
                     String password = sc.nextLine();
-                    System.out.print("Tipo de Utilizador ( Aluno | Docente | Administrador | Funcionário ): ");
-                    String tipo = sc.nextLine();
                     utilizadorAtual = new Utilizador(
                             id,
                             nome,
                             email,
-                            password,
-                            tipo
+                            password
+                         
                     );
                     sistema.criarUtilizador(utilizadorAtual);
                     break;
@@ -318,6 +317,36 @@ public class Teste {
 
                     break;
                 case 7:
+                    System.out.println(
+                            "\n========== LOGIN =========="
+                        );
+
+                        System.out.print("Email: ");
+
+                        String emailLogin =
+                            sc.nextLine();
+
+                        System.out.print("Password: ");
+
+                        String passwordLogin =
+                            sc.nextLine();
+
+                        utilizadorAtual =
+                            sistema.login(
+                                emailLogin,
+                                passwordLogin
+                            );
+
+                        if(utilizadorAtual != null) {
+
+                            System.out.println(
+                                "\nBem-vindo " +
+                                utilizadorAtual.getNome()
+                            );
+                        }
+
+                        break;
+                case 8:
                     if (sistema.getUtilizadores().isEmpty()) {
                         System.out.println("\nNão existem utilizadores.");
                         break;
