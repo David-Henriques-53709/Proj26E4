@@ -86,6 +86,32 @@ public class Utilizador {
             System.out.println(o);
         }
     }
+    
+    public void cancelarOcorrencia(int indice) {
+
+        if(indice < 0 || indice >= ocorrencias.size()) {
+            System.out.println("Ocorrência inválida!");
+            return;
+        }
+
+        Ocorrencia ocorrencia = ocorrencias.get(indice);
+
+        if(!ocorrencia.getEstadoAtual().getNomeEstado()
+                .equals("Por Resolver")) {
+
+            System.out.println(
+                "Só pode cancelar ocorrências Por Resolver!"
+            );
+
+            return;
+        }
+
+        ocorrencias.remove(indice);
+
+        System.out.println(
+            "Ocorrência cancelada com sucesso!"
+        );
+    }
     public String toString() {
         return "\n==============================" +
                "\nID Utilizador   : " + idUtilizador +
