@@ -45,6 +45,9 @@ public class Ocorrencia {
 	public Prioridade getPrioridades() {
 		return prioridades;
 	}
+	public EstadoOcorrencia getEstadoAtual() {
+		return estadoAtual;
+	}
 	public void setTitulo(String titulo) {
 		this.titulo=titulo;
 	}
