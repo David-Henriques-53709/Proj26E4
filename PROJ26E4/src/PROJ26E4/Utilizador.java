@@ -53,6 +53,7 @@ public class Utilizador {
     public void criarOcorrencia(String titulo,
                                 String descricao,
                                 Prioridade prioridade,
+                                Categoria categoria,
                                 String bloco,
                                 String piso,
                                 String local) {
@@ -68,6 +69,7 @@ public class Utilizador {
                 descricao,
                 LocalDate.now(),
                 prioridade,
+                categoria,
                 estadoInicial,
                 bloco,
                 piso,
@@ -120,6 +122,19 @@ public class Utilizador {
 	        return null;
 	    }
 	}
+    
+    public void avaliarOcorrencia(int indice, int classificacao) {
+        if(indice < 0 || indice >= ocorrencias.size()) {
+            System.out.println("Ocorrência inválida!");
+            return;
+        }
+        Ocorrencia ocorrencia = ocorrencias.get(indice);
+        if(!ocorrencia.getEstadoAtual().getNomeEstado().equals("Concluída")) {
+            System.out.println("Só pode avaliar ocorrências resolvidas!");
+            return;
+        }
+        ocorrencia.avaliarOcorrencia(classificacao);
+    }
     
     public String toString() {
         return "\n==============================" +
