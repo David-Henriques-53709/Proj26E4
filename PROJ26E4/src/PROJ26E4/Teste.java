@@ -46,7 +46,10 @@ public class Teste {
         System.out.println("4 - Consultar Ocorrências");
         System.out.println("5 - Atualizar Estado da Ocorrência");
         System.out.println("6 - Cancelar Ocorrência");
-        System.out.println("7 - Remover Utilizador");
+        System.out.println("7 - Avaliar Resolução da Ocorrência");
+        System.out.println("8 - Criar Relatório de Ocorrências");
+        System.out.println("9 - Adicionar Comentário");
+        System.out.println("10 - Remover Utilizador");
         System.out.println("0 - Sair");
         System.out.println("==================================================");
         System.out.print("Escolha uma opção: ");
@@ -109,6 +112,40 @@ public class Teste {
                     String titulo = sc.nextLine();
                     System.out.print("Descrição: ");
                     String descricao = sc.nextLine();
+                    System.out.println("\nCategorias:");
+                    System.out.println("1 - Informática");
+                    System.out.println("2 - Estrutura");
+                    System.out.println("3 - Elétrica");
+                    System.out.println("4 - Climatização e Ventilação");
+                    System.out.println("5 - Segurança");
+                    System.out.println("6 - Limpeza");
+                    System.out.println("7 - Equipamentos");
+                    System.out.print("Escolha: ");
+                    int categoriaOpcao = sc.nextInt();
+                    sc.nextLine();
+                    Categoria categoria;
+                    switch(categoriaOpcao) {
+                        case 1:
+                            categoria = Categoria.Informatica;
+                            break;
+                        case 2:
+                            categoria = Categoria.Estrutura;
+                            break;
+                        case 3:
+                            categoria = Categoria.Eletricidade;
+                            break;
+                        case 4:
+                            categoria = Categoria.Climatizacao_Ventilacao;
+                            break;
+                        case 5:
+                            categoria = Categoria.Seguranca;
+                            break;
+                        case 6:
+                            categoria = Categoria.Limpeza;
+                            break;
+                        default:
+                            categoria = Categoria.Equipamentos;
+                    }
                     Mapa mapa = new Mapa();
                     String localizacao = mapa.escolherLocal(sc);
                     String[] partes = localizacao.split(" - ");
@@ -137,6 +174,7 @@ public class Teste {
                             titulo,
                             descricao,
                             prioridade,
+                            categoria,
                             bloco,
                             piso,
                             local
@@ -259,8 +297,92 @@ public class Teste {
                         System.out.println("Cancelamento cancelado.");
                     }
                     break;
-   
+                    
                 case 7:
+                    if (sistema.getUtilizadores().isEmpty()) {
+                        System.out.println("\nNão existem utilizadores.");
+                        break;
+                    }
+                    System.out.println("\n===== UTILIZADORES =====");
+                    for (int i = 0; i < sistema.getUtilizadores().size(); i++) {
+                        System.out.println(
+                            (i + 1) + " - " +
+                            sistema.getUtilizadores().get(i).getNome()
+                        );
+                    }
+                    System.out.print("Escolha o utilizador: ");
+                    int userAvaliacao = sc.nextInt();
+                    sc.nextLine();
+                    utilizadorAtual =sistema.getUtilizadores().get(userAvaliacao - 1);
+                    if (utilizadorAtual.getOcorrencias().isEmpty()) {
+                        System.out.println("\nO utilizador não tem ocorrências.");
+                        break;
+                    }
+                    System.out.println("\n===== OCORRÊNCIAS =====");
+                    for (int i = 0;i < utilizadorAtual.getOcorrencias().size();i++) {
+                        System.out.println((i + 1) + " - " +utilizadorAtual.getOcorrencias().get(i).getTitulo());
+                    }
+                    System.out.print("\nEscolha a ocorrência: ");
+                    int ocorrenciaAvaliacao = sc.nextInt();
+                    sc.nextLine();
+                    System.out.print("Classificação (1 a 5): ");
+                    int classificacao = sc.nextInt();
+                    sc.nextLine();
+                    utilizadorAtual.avaliarOcorrencia(ocorrenciaAvaliacao - 1,classificacao);
+                    break;
+                    
+                case 8:
+                    if(utilizadorAtual == null) {
+                        System.out.println("\nNenhum utilizador registado.");
+                        break;
+                    }
+                    if(!utilizadorAtual.getTipoUtilizador().equals("Administrador")) {
+                        System.out.println("\nApenas administradores podem criar relatórios!"
+                        );
+                        break;
+                    }
+                    sistema.criarRelatorioOcorrencias();
+                    break;
+                    
+                case 9:
+                    if (utilizadorAtual == null) {
+                        System.out.println("\nNenhum utilizador registado.");
+                        break;
+                    }
+                    if (!utilizadorAtual.getTipoUtilizador().equals("Administrador")) {
+                        System.out.println("\nApenas administradores podem comentar!");
+                        break;
+                    }
+                    if (sistema.getUtilizadores().isEmpty()) {
+                        System.out.println("\nNão existem utilizadores.");
+                        break;
+                    }
+                    System.out.println("\n===== UTILIZADORES =====");
+                    for (int i = 0;i < sistema.getUtilizadores().size();i++) {
+                        System.out.println((i + 1) + " - " +sistema.getUtilizadores().get(i).getNome());
+                    }
+                    System.out.print("Escolha o utilizador: ");
+                    int userComentario = sc.nextInt();
+                    sc.nextLine();
+                    Utilizador u =sistema.getUtilizadores().get(userComentario - 1);
+                    if (u.getOcorrencias().isEmpty()) {
+                        System.out.println("\nO utilizador não tem ocorrências.");
+                        break;
+                    }
+                    System.out.println("\n===== OCORRÊNCIAS =====");
+                    for (int i = 0;i < u.getOcorrencias().size();i++) {
+                        System.out.println((i + 1) + " - " +u.getOcorrencias().get(i).getTitulo());
+                    }
+                    System.out.print("Escolha a ocorrência: ");
+                    int ocorrenciaComentario = sc.nextInt();
+                    sc.nextLine();
+                    Ocorrencia ocorrenciaComentada =u.getOcorrencias().get(ocorrenciaComentario - 1);
+                    System.out.print("Comentário: ");
+                    String comentario = sc.nextLine();
+                    ocorrenciaComentada.adicionarComentario(comentario,utilizadorAtual.getNome());
+                    break;
+   
+                case 10:
                     if (sistema.getUtilizadores().isEmpty()) {
                         System.out.println("\nNão existem utilizadores.");
                         break;
