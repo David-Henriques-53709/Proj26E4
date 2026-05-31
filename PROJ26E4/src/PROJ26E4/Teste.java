@@ -332,27 +332,36 @@ public class Teste {
                     break;
                     
                 case 8:
-                    if(utilizadorAtual == null) {
-                        System.out.println("\nNenhum utilizador registado.");
-                        break;
+                    System.out.println("\n===== UTILIZADORES =====");
+                    for (int i = 0; i < sistema.getUtilizadores().size(); i++) {
+                        System.out.println((i + 1) + " - " +
+                                sistema.getUtilizadores().get(i).getNome());
                     }
-                    if(!utilizadorAtual.getTipoUtilizador().equals("Administrador")) {
-                        System.out.println("\nApenas administradores podem criar relatórios!"
-                        );
+                    System.out.print("Escolha o administrador: ");
+                    int adminEscolha = sc.nextInt();
+                    sc.nextLine();
+                    Utilizador admin =sistema.getUtilizadores().get(adminEscolha - 1);
+                    if(!admin.getTipoUtilizador().equals("Administrador")) {
+                        System.out.println("O utilizador escolhido não é administrador!");
                         break;
                     }
                     sistema.criarRelatorioOcorrencias();
                     break;
                     
                 case 9:
-                    if (utilizadorAtual == null) {
-                        System.out.println("\nNenhum utilizador registado.");
-                        break;
-                    }
-                    if (!utilizadorAtual.getTipoUtilizador().equals("Administrador")) {
-                        System.out.println("\nApenas administradores podem comentar!");
-                        break;
-                    }
+                	System.out.println("\n===== ADMINISTRADORES =====");
+                	for (int i = 0; i < sistema.getUtilizadores().size(); i++) {
+                	    System.out.println((i + 1) + " - " +
+                	            sistema.getUtilizadores().get(i).getNome());
+                	}
+                	System.out.print("Escolha o administrador: ");
+                	int adminEscolh = sc.nextInt();
+                	sc.nextLine();
+                	Utilizador Admin =sistema.getUtilizadores().get(adminEscolh - 1);
+                	if(!Admin.getTipoUtilizador().equals("Administrador")) {
+                	    System.out.println("O utilizador escolhido não é administrador!");
+                	    break;
+                	}
                     if (sistema.getUtilizadores().isEmpty()) {
                         System.out.println("\nNão existem utilizadores.");
                         break;
@@ -379,7 +388,7 @@ public class Teste {
                     Ocorrencia ocorrenciaComentada =u.getOcorrencias().get(ocorrenciaComentario - 1);
                     System.out.print("Comentário: ");
                     String comentario = sc.nextLine();
-                    ocorrenciaComentada.adicionarComentario(comentario,utilizadorAtual.getNome());
+                    ocorrenciaComentada.adicionarComentario(comentario,Admin.getNome());
                     break;
    
                 case 10:

@@ -109,6 +109,10 @@ public class Ocorrencia {
 	    System.out.println("Comentário adicionado com sucesso!");
 	}
 	public String toString() {
+		 String listaComentarios = "";
+		    for(Comentario c : comentarios) {
+		        listaComentarios += c + "\n";
+		    }
 	    return "\n==================================" +
 	           "\nID Ocorrência : " + idOcorrencia +
 	           "\nTítulo        : " + titulo +
@@ -121,7 +125,7 @@ public class Ocorrencia {
 	           "\nPiso          : " + piso +
 	           "\nLocal         : " + local +
 	           "\nAvaliação     : " + avaliacao +
-	           "\nComentários   : " + comentarios +
+	           "\nComentários   : " + listaComentarios +
 	           "\n==================================";
 	}
  }
