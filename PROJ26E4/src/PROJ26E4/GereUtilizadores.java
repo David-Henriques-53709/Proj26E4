@@ -41,11 +41,12 @@ public class GereUtilizadores {
 		    int concluidas = 0;
 		    int pendentes = 0;
 		    int informatica = 0;
-		    int estrutura = 0;
+		    int manutencao_geral = 0;
 		    int eletricidade = 0;
 		    int climatizacao_ventilacao = 0;
 		    int seguranca = 0;
 		    int limpeza = 0;
+		    int marketing = 0;
 		    int equipamentos = 0;
 		    for(Utilizador u : utilizadores) {
 		        for(Ocorrencia o : u.getOcorrencias()) {
@@ -59,8 +60,8 @@ public class GereUtilizadores {
 		                case Informatica:
 		                    informatica++;
 		                    break;
-		                case Estrutura:
-		                    estrutura++;
+		                case Manutencao_Geral:
+		                    manutencao_geral++;
 		                    break;
 		                case Eletricidade:
 		                    eletricidade++;
@@ -74,6 +75,9 @@ public class GereUtilizadores {
 		                case Limpeza:
 		                    limpeza++;
 		                    break;
+		                case Marketing:
+		                	marketing++;
+		                	break;
 		                case Equipamentos:
 		                    equipamentos++;
 		                    break;
@@ -87,11 +91,12 @@ public class GereUtilizadores {
 		    System.out.println("Em Progresso  : " + pendentes);
 		    System.out.println("\n===== POR CATEGORIA =====");
 		    System.out.println("Informática                : " + informatica);
-		    System.out.println("Estrutural                 : " + estrutura);
+		    System.out.println("Manutenção Geral           : " + manutencao_geral);
 		    System.out.println("Elétrica                   : " + eletricidade);
 		    System.out.println("Climatização e Ventilação  : " + climatizacao_ventilacao);
 		    System.out.println("Segurança                  : " + seguranca);
 		    System.out.println("Limpeza                    : " + limpeza);
+		    System.out.println("Marketing                  : " + marketing);
 		    System.out.println("Equipamentos               : " + equipamentos);
 		    System.out.println("\n===============================");
 		}
