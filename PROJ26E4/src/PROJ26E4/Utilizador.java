@@ -123,6 +123,16 @@ public class Utilizador {
 	    }
 	}
     
+    public boolean isAdministrador() {
+        return tipoUtilizador.equalsIgnoreCase("Administrador");
+    }
+    public boolean isAluno() {
+        return tipoUtilizador.equalsIgnoreCase("Aluno");
+    }
+    public boolean isFuncionario() {
+        return tipoUtilizador.equalsIgnoreCase("Funcionário|Docente");
+    }
+    
     public void avaliarOcorrencia(int indice, int classificacao) {
         if(indice < 0 || indice >= ocorrencias.size()) {
             System.out.println("Ocorrência inválida!");
