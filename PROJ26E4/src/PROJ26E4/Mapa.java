@@ -1,5 +1,6 @@
 package PROJ26E4;
 import java.util.Scanner;
+import java.util.ArrayList;
 public class Mapa {
 	public Mapa() {
 	}
@@ -11,6 +12,7 @@ public class Mapa {
 	private String idMapa;
     private String nomeMapa;
     private String descricao;
+    private ArrayList<Local>locaisNovos = new ArrayList<>();
 
 	public String getIdMapa() {
 		return idMapa;
@@ -222,5 +224,27 @@ public class Mapa {
             }
         }
         return bloco + " - " + piso + " - " + local;
+    }
+    public void adicionarLocal(
+            String bloco,
+            String piso,
+            String nome) {
+        Local novoLocal = new Local(
+                bloco,
+                piso,
+                nome
+        );
+        locaisNovos.add(novoLocal);
+        System.out.println("Local adicionado com sucesso!");
+    }
+    public void mostrarLocaisNovos() {
+        if(locaisNovos.isEmpty()) {
+            System.out.println("Não existem locais adicionados.");
+            return;
+        }
+        System.out.println("\n===== LOCAIS ADICIONADOS =====");
+        for(Local l : locaisNovos) {
+            System.out.println(l);
+        }
     }
 }

@@ -41,15 +41,17 @@ public class Teste {
         System.out.println("        SISTEMA DE COMUNICAÇÃO DE OCORRÊNCIAS NA UPT");
         System.out.println("=======================================================");
         System.out.println("1 - Criar Utilizador");
-        System.out.println("2 - Mostrar Utilizadores");
-        System.out.println("3 - Criar Ocorrência");
-        System.out.println("4 - Consultar Ocorrências");
-        System.out.println("5 - Atualizar Estado da Ocorrência");
-        System.out.println("6 - Cancelar Ocorrência");
-        System.out.println("7 - Avaliar Resolução da Ocorrência");
-        System.out.println("8 - Criar Relatório de Ocorrências");
-        System.out.println("9 - Adicionar Comentário");
-        System.out.println("10 - Remover Utilizador");
+        System.out.println("2 - Login");
+        System.out.println("3 - Mostrar Utilizadores");
+        System.out.println("4 - Criar Ocorrência");
+        System.out.println("5 - Consultar Ocorrências");
+        System.out.println("6 - Atualizar Estado da Ocorrência");
+        System.out.println("7 - Cancelar Ocorrência");
+        System.out.println("8 - Avaliar Resolução da Ocorrência");
+        System.out.println("9 - Criar Relatório de Ocorrências");
+        System.out.println("10 - Adicionar Comentário");
+        System.out.println("11 - Remover Utilizador");
+        System.out.println("12 - Adicionar Local");
         System.out.println("0 - Sair");
         System.out.println("==================================================");
         System.out.print("Escolha uma opção: ");
@@ -61,6 +63,7 @@ public class Teste {
         Scanner sc = new Scanner(System.in);
         GereUtilizadores sistema = new GereUtilizadores();
         Utilizador utilizadorAtual = null;
+        Mapa mapa = new Mapa();
         int opcao;
         do {
             menu();
@@ -87,13 +90,28 @@ public class Teste {
                     );
                     sistema.criarUtilizador(utilizadorAtual);
                     break;
-
+                    
                 case 2:
+                	System.out.print("Email: ");
+                	String mail = sc.nextLine();
+                	System.out.print("Password: ");
+                	String pass = sc.nextLine();
+                	utilizadorAtual = sistema.login(mail, pass);
+                	if(utilizadorAtual != null) {
+                	    System.out.println("Login efetuado com sucesso!");
+                	    System.out.println("Tipo: " +utilizadorAtual.getTipoUtilizador());
+                	}
+                	else {
+                	    System.out.println("Credenciais inválidas!");
+                	}
+                	break;
+
+                case 3:
                     System.out.println("\n========== UTILIZADORES ==========");
                     sistema.mostrarUtilizadores();
                     break;
 
-                case 3:
+                case 4:
                     if (utilizadorAtual == null) {
                         System.out.println("\nCrie primeiro um utilizador!");
                         break;
@@ -150,7 +168,6 @@ public class Teste {
                         default:
                             categoria = Categoria.Equipamentos;
                     }
-                    Mapa mapa = new Mapa();
                     String localizacao = mapa.escolherLocal(sc);
                     String[] partes = localizacao.split(" - ");
                     String bloco = partes[0];
@@ -185,7 +202,7 @@ public class Teste {
                     );
                     break;
 
-                case 4:
+                case 5:
                 	if (sistema.getUtilizadores().isEmpty()) {
                         System.out.println("\nNenhum utilizador foi criado.");
                         break;
@@ -201,7 +218,15 @@ public class Teste {
                     }
                     break;
 
-                case 5:
+                case 6:
+                	if(utilizadorAtual == null) {
+                	    System.out.println("Tem de fazer login primeiro!");
+                	    break;
+                	}
+                	if(!utilizadorAtual.isAdministrador()) {
+                	    System.out.println("Apenas administradores podem atualizar ocorrências!");
+                	    break;
+                	}
                     if (sistema.getUtilizadores().isEmpty()) {
                         System.out.println("\nNão existem utilizadores.");
                         break;
@@ -264,7 +289,7 @@ public class Teste {
                     sistema.atualizarEstadoOcorrencia(ocorrencia,novoEstado);
                     break;
                     
-                case 6:
+                case 7:
                     if(sistema.getUtilizadores().isEmpty()) {
                         System.out.println("\nNão existem utilizadores.");
                         break;
@@ -302,7 +327,7 @@ public class Teste {
                     }
                     break;
                     
-                case 7:
+                case 8:
                     if (sistema.getUtilizadores().isEmpty()) {
                         System.out.println("\nNão existem utilizadores.");
                         break;
@@ -335,7 +360,15 @@ public class Teste {
                     utilizadorAtual.avaliarOcorrencia(ocorrenciaAvaliacao - 1,classificacao);
                     break;
                     
-                case 8:
+                case 9:
+                	if(utilizadorAtual == null) {
+                	    System.out.println("Tem de fazer login primeiro!");
+                	    break;
+                	}
+                	if(!utilizadorAtual.isAdministrador()) {
+                	    System.out.println("Apenas administradores podem criar relatórios!");
+                	    break;
+                	}
                     System.out.println("\n===== UTILIZADORES =====");
                     for (int i = 0; i < sistema.getUtilizadores().size(); i++) {
                         System.out.println((i + 1) + " - " +
@@ -352,7 +385,7 @@ public class Teste {
                     sistema.criarRelatorioOcorrencias();
                     break;
                     
-                case 9:
+                case 10:
                 	System.out.println("\n===== ADMINISTRADORES =====");
                 	for (int i = 0; i < sistema.getUtilizadores().size(); i++) {
                 	    System.out.println((i + 1) + " - " +
@@ -395,7 +428,15 @@ public class Teste {
                     ocorrenciaComentada.adicionarComentario(comentario,Admin.getNome());
                     break;
    
-                case 10:
+                case 11:
+                	if(utilizadorAtual == null) {
+                	    System.out.println("Tem de fazer login primeiro!");
+                	    break;
+                	}
+                	if(!utilizadorAtual.isAdministrador()) {
+                	    System.out.println("Apenas administradores podem remover utilizadores!");
+                	    break;
+                	}
                     if (sistema.getUtilizadores().isEmpty()) {
                         System.out.println("\nNão existem utilizadores.");
                         break;
@@ -413,6 +454,40 @@ public class Teste {
                     Utilizador utilizadorRemover =sistema.getUtilizadores().get(removerEscolha - 1);
                     sistema.removerUtilizador(utilizadorRemover.getId());
                     System.out.println("\nUtilizador removido com sucesso!");
+                    break;
+                    
+                case 12:
+                    if (sistema.getUtilizadores().isEmpty()) {
+                        System.out.println("\nNão existem utilizadores.");
+                        break;
+                    }
+                    System.out.println("\n===== UTILIZADORES =====");
+                    for (int i = 0; i < sistema.getUtilizadores().size(); i++) {
+                        System.out.println(
+                            (i + 1) + " - " +
+                            sistema.getUtilizadores().get(i).getNome()
+                        );
+                    }
+                    System.out.print("Escolha o administrador: ");
+                    int adminEscolhaMapa = sc.nextInt();
+                    sc.nextLine();
+                    Utilizador adminMapa =
+                            sistema.getUtilizadores().get(adminEscolhaMapa - 1);
+                    if (!adminMapa.getTipoUtilizador().equals("Administrador")) {
+                        System.out.println("O utilizador escolhido não é administrador!");
+                        break;
+                    }
+                    System.out.print("Bloco: ");
+                    String blocoNovo = sc.nextLine();
+                    System.out.print("Piso: ");
+                    String pisoNovo = sc.nextLine();
+                    System.out.print("Nome do Local: ");
+                    String nomeLocal = sc.nextLine();
+                    mapa.adicionarLocal(
+                        blocoNovo,
+                        pisoNovo,
+                        nomeLocal
+                    );
                     break;
 
                 case 0:

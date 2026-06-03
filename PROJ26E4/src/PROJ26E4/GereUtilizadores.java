@@ -100,4 +100,13 @@ public class GereUtilizadores {
 		    System.out.println("Equipamentos               : " + equipamentos);
 		    System.out.println("\n===============================");
 		}
+		public Utilizador login(String email, String password) {
+		    for(Utilizador u : utilizadores) {
+		        if(u.getEmail().equalsIgnoreCase(email)
+		                && u.getPassword().equals(password)) {
+		            return u;
+		        }
+		    }
+		    return null;
+		}
 }
