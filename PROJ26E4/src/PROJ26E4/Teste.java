@@ -114,12 +114,13 @@ public class Teste {
                     String descricao = sc.nextLine();
                     System.out.println("\nCategorias:");
                     System.out.println("1 - Informática");
-                    System.out.println("2 - Estrutura");
+                    System.out.println("2 - Manutenção Geral");
                     System.out.println("3 - Elétrica");
                     System.out.println("4 - Climatização e Ventilação");
                     System.out.println("5 - Segurança");
                     System.out.println("6 - Limpeza");
-                    System.out.println("7 - Equipamentos");
+                    System.out.println("7 - Marketing");
+                    System.out.println("8 - Equipamentos");
                     System.out.print("Escolha: ");
                     int categoriaOpcao = sc.nextInt();
                     sc.nextLine();
@@ -129,7 +130,7 @@ public class Teste {
                             categoria = Categoria.Informatica;
                             break;
                         case 2:
-                            categoria = Categoria.Estrutura;
+                            categoria = Categoria.Manutencao_Geral;
                             break;
                         case 3:
                             categoria = Categoria.Eletricidade;
@@ -143,6 +144,9 @@ public class Teste {
                         case 6:
                             categoria = Categoria.Limpeza;
                             break;
+                        case 7:
+                        	categoria = Categoria.Marketing;
+                        	break;
                         default:
                             categoria = Categoria.Equipamentos;
                     }

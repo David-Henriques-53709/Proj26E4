@@ -11,12 +11,13 @@ enum Prioridade{
 
 enum Categoria {
     Informatica,
-    Estrutura,
+    Manutencao_Geral,
     Eletricidade,
     Climatizacao_Ventilacao,
     Seguranca,
     Limpeza,
-    Equipamentos
+    Equipamentos,
+    Marketing
 }
 
 public class Ocorrencia {
@@ -109,10 +110,22 @@ public class Ocorrencia {
 	    System.out.println("Comentário adicionado com sucesso!");
 	}
 	public String toString() {
-		 String listaComentarios = "";
+		String listaComentarios;
+		if(comentarios.isEmpty()) {
+		    listaComentarios = "Sem comentários.";
+		}
+		else {
+		    listaComentarios = "";
 		    for(Comentario c : comentarios) {
 		        listaComentarios += c + "\n";
 		    }
+		}
+		String textoAvaliacao;
+		if(avaliacao == null) {
+		    textoAvaliacao = "Sem avaliação!";
+		} else {
+		    textoAvaliacao = String.valueOf(avaliacao);
+		}
 	    return "\n==================================" +
 	           "\nID Ocorrência : " + idOcorrencia +
 	           "\nTítulo        : " + titulo +
@@ -124,7 +137,7 @@ public class Ocorrencia {
 	           "\nBloco         : " + bloco +
 	           "\nPiso          : " + piso +
 	           "\nLocal         : " + local +
-	           "\nAvaliação     : " + avaliacao +
+	           "\nAvaliação     : " + textoAvaliacao +
 	           "\nComentários   : " + listaComentarios +
 	           "\n==================================";
 	}
