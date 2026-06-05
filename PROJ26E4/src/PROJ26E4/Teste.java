@@ -51,7 +51,7 @@ public class Teste {
         System.out.println("9 - Criar Relatório de Ocorrências");
         System.out.println("10 - Adicionar Comentário");
         System.out.println("11 - Remover Utilizador");
-        System.out.println("12 - Adicionar Local");
+        System.out.println("12 - Adicionar Local Novo");
         System.out.println("0 - Sair");
         System.out.println("==================================================");
         System.out.print("Escolha uma opção: ");
@@ -219,12 +219,17 @@ public class Teste {
                     break;
 
                 case 6:
-                	if(utilizadorAtual == null) {
-                	    System.out.println("Tem de fazer login primeiro!");
-                	    break;
+                	System.out.println("\n===== UTILIZADORES =====");
+                	for (int i = 0; i < sistema.getUtilizadores().size(); i++) {
+                	    System.out.println((i + 1) + " - " +
+                	            sistema.getUtilizadores().get(i).getNome());
                 	}
-                	if(!utilizadorAtual.isAdministrador()) {
-                	    System.out.println("Apenas administradores podem atualizar ocorrências!");
+                	System.out.print("Escolha o administrador: ");
+                	int adminEscolha = sc.nextInt();
+                	sc.nextLine();
+                	Utilizador admin =sistema.getUtilizadores().get(adminEscolha - 1);
+                	if(!admin.isAdministrador()) {
+                	    System.out.println("O utilizador escolhido não é administrador!");
                 	    break;
                 	}
                     if (sistema.getUtilizadores().isEmpty()) {
@@ -361,24 +366,20 @@ public class Teste {
                     break;
                     
                 case 9:
-                	if(utilizadorAtual == null) {
-                	    System.out.println("Tem de fazer login primeiro!");
-                	    break;
-                	}
-                	if(!utilizadorAtual.isAdministrador()) {
-                	    System.out.println("Apenas administradores podem criar relatórios!");
-                	    break;
-                	}
+                    if (sistema.getUtilizadores().isEmpty()) {
+                        System.out.println("\nNão existem utilizadores.");
+                        break;
+                    }
                     System.out.println("\n===== UTILIZADORES =====");
                     for (int i = 0; i < sistema.getUtilizadores().size(); i++) {
                         System.out.println((i + 1) + " - " +
                                 sistema.getUtilizadores().get(i).getNome());
                     }
                     System.out.print("Escolha o administrador: ");
-                    int adminEscolha = sc.nextInt();
+                    int adminEsco = sc.nextInt();
                     sc.nextLine();
-                    Utilizador admin =sistema.getUtilizadores().get(adminEscolha - 1);
-                    if(!admin.getTipoUtilizador().equals("Administrador")) {
+                    Utilizador adm =sistema.getUtilizadores().get(adminEsco - 1);
+                    if (!adm.isAdministrador()) {
                         System.out.println("O utilizador escolhido não é administrador!");
                         break;
                     }
@@ -386,16 +387,16 @@ public class Teste {
                     break;
                     
                 case 10:
-                	System.out.println("\n===== ADMINISTRADORES =====");
+                	System.out.println("\n===== UTILIZADORES =====");
                 	for (int i = 0; i < sistema.getUtilizadores().size(); i++) {
                 	    System.out.println((i + 1) + " - " +
                 	            sistema.getUtilizadores().get(i).getNome());
                 	}
                 	System.out.print("Escolha o administrador: ");
-                	int adminEscolh = sc.nextInt();
+                	int adminE = sc.nextInt();
                 	sc.nextLine();
-                	Utilizador Admin =sistema.getUtilizadores().get(adminEscolh - 1);
-                	if(!Admin.getTipoUtilizador().equals("Administrador")) {
+                	Utilizador Admin =sistema.getUtilizadores().get(adminE - 1);
+                	if(!Admin.isAdministrador()) {
                 	    System.out.println("O utilizador escolhido não é administrador!");
                 	    break;
                 	}
@@ -429,24 +430,27 @@ public class Teste {
                     break;
    
                 case 11:
-                	if(utilizadorAtual == null) {
-                	    System.out.println("Tem de fazer login primeiro!");
-                	    break;
-                	}
-                	if(!utilizadorAtual.isAdministrador()) {
-                	    System.out.println("Apenas administradores podem remover utilizadores!");
-                	    break;
-                	}
                     if (sistema.getUtilizadores().isEmpty()) {
                         System.out.println("\nNão existem utilizadores.");
                         break;
                     }
                     System.out.println("\n===== UTILIZADORES =====");
                     for (int i = 0; i < sistema.getUtilizadores().size(); i++) {
-                        System.out.println(
-                            (i + 1) + " - " +
-                            sistema.getUtilizadores().get(i).getNome()
-                        );
+                        System.out.println((i + 1) + " - " +
+                                sistema.getUtilizadores().get(i).getNome());
+                    }
+                    System.out.print("Escolha o administrador: ");
+                    int adminEscol= sc.nextInt();
+                    sc.nextLine();
+                    Utilizador admi =sistema.getUtilizadores().get(adminEscol- 1);
+                    if (!admi.isAdministrador()) {
+                        System.out.println("O utilizador escolhido não é administrador!");
+                        break;
+                    }
+                    System.out.println("\n===== UTILIZADORES =====");
+                    for (int i = 0; i < sistema.getUtilizadores().size(); i++) {
+                        System.out.println((i + 1) + " - " +
+                                sistema.getUtilizadores().get(i).getNome());
                     }
                     System.out.print("Escolha o utilizador a remover: ");
                     int removerEscolha = sc.nextInt();
@@ -473,14 +477,15 @@ public class Teste {
                     sc.nextLine();
                     Utilizador adminMapa =
                             sistema.getUtilizadores().get(adminEscolhaMapa - 1);
-                    if (!adminMapa.getTipoUtilizador().equals("Administrador")) {
+                    if(!adminMapa.isAdministrador()) {
                         System.out.println("O utilizador escolhido não é administrador!");
                         break;
                     }
-                    System.out.print("Bloco: ");
+                    System.out.print("Nome do Bloco: ");
                     String blocoNovo = sc.nextLine();
-                    System.out.print("Piso: ");
-                    String pisoNovo = sc.nextLine();
+                    System.out.print("Número do Piso: ");
+                    int pisoNovo = sc.nextInt();
+                    sc.nextLine();
                     System.out.print("Nome do Local: ");
                     String nomeLocal = sc.nextLine();
                     mapa.adicionarLocal(

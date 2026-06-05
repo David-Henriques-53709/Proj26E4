@@ -6,13 +6,13 @@ public class Local {
 	 * @param piso
 	 * @param nome
 	 */
-	public Local(String bloco, String piso, String nome) {
+	public Local(String bloco, int piso, String nome) {
 		this.bloco = bloco;
 		this.piso = piso;
 		this.nome = nome;
 	}
 	private String bloco;
-    private String piso;
+    private int piso;
     private String nome;
 	/**
 	 * @return the bloco
@@ -23,7 +23,7 @@ public class Local {
 	/**
 	 * @return the piso
 	 */
-	public String getPiso() {
+	public int getPiso() {
 		return piso;
 	}
 	/**
@@ -33,8 +33,8 @@ public class Local {
 		return nome;
 	}
 	public String toString() {
-		return "Bloco: "+bloco+
-				"\nPiso: "+piso+
-				"|nNome do Local: "+nome;
+		return "Nome do Bloco: "+bloco+
+				"\nNúmero do Piso: "+piso+
+				"\nNome do Local: "+nome;
 	}
 }
