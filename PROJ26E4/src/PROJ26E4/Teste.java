@@ -36,8 +36,7 @@ public class Teste {
 	    System.out.println("53340 - Sérgio Correia");
 	    System.out.println("\n=======================================================\n");
 	}
-    
-	public static void menuSemLogin() {
+	public static void menuLogin() {
         System.out.println("\n=======================================================");
         System.out.println("        SISTEMA DE COMUNICAÇÃO DE OCORRÊNCIAS NA UPT");
         System.out.println("=======================================================");
@@ -47,7 +46,6 @@ public class Teste {
         System.out.println("=======================================================");
         System.out.print("Escolha uma opção: ");
     }
- 
     public static void menuAdmin() {
         System.out.println("\n=======================================================");
         System.out.println("                  MENU ADMINISTRADOR");
@@ -64,7 +62,6 @@ public class Teste {
         System.out.println("=======================================================");
         System.out.print("Escolha uma opção: ");
     }
- 
     public static void menuUtilizador() {
         System.out.println("\n=======================================================");
         System.out.println("                  MENU UTILIZADOR");
@@ -78,7 +75,6 @@ public class Teste {
         System.out.println("=======================================================");
         System.out.print("Escolha uma opção: ");
     }
- 
     public static void main(String[] args) {
         Teste sistemaVisual = new Teste();
         sistemaVisual.mostrarSistema();
@@ -87,24 +83,20 @@ public class Teste {
         Utilizador utilizadorAtual = null;
         Mapa mapa = new Mapa();
         int opcao;
- 
         do {
-            // Mostra o menu correto conforme o estado de login
             if (utilizadorAtual == null) {
-                menuSemLogin();
+                menuLogin();
             } else if (utilizadorAtual.isAdministrador()) {
                 menuAdmin();
             } else {
                 menuUtilizador();
             }
- 
             opcao = sc.nextInt();
             sc.nextLine();
- 
-            // ── SEM LOGIN ──────────────────────────────────────────────
             if (utilizadorAtual == null) {
                 switch (opcao) {
-                    case 1:
+                    
+                	case 1:
                         System.out.println("\n========== CRIAR UTILIZADOR ==========");
                         System.out.print("ID: ");
                         String id = sc.nextLine();
@@ -117,7 +109,7 @@ public class Teste {
                         Utilizador novo = new Utilizador(id, nome, email, password);
                         sistema.criarUtilizador(novo);
                         break;
- 
+                    
                     case 2:
                         System.out.print("Email: ");
                         String mail = sc.nextLine();
@@ -131,23 +123,22 @@ public class Teste {
                             System.out.println("Credenciais inválidas!");
                         }
                         break;
- 
+                    
                     case 0:
                         System.out.println("\nSistema encerrado.");
                         break;
- 
+                    
                     default:
                         System.out.println("\nOpção inválida!");
                 }
- 
-            // ── ADMINISTRADOR ──────────────────────────────────────────
             } else if (utilizadorAtual.isAdministrador()) {
                 switch (opcao) {
-                    case 1:
+                    
+                	case 1:
                         System.out.println("\n========== UTILIZADORES ==========");
                         sistema.mostrarUtilizadores();
-                        break;
- 
+                        break; 
+                    
                     case 2:
                         if (sistema.getUtilizadores().isEmpty()) {
                             System.out.println("\nNenhum utilizador foi criado.");
@@ -163,7 +154,7 @@ public class Teste {
                             }
                         }
                         break;
- 
+                    
                     case 3:
                         if (sistema.getUtilizadores().isEmpty()) {
                             System.out.println("\nNão existem utilizadores.");
@@ -258,14 +249,7 @@ public class Teste {
                         break;
  
                     case 7:
-                        System.out.print("Nome do Bloco: ");
-                        String blocoNovo = sc.nextLine();
-                        System.out.print("Número do Piso: ");
-                        int pisoNovo = sc.nextInt();
-                        sc.nextLine();
-                        System.out.print("Nome do Local: ");
-                        String nomeLocal = sc.nextLine();
-                        mapa.adicionarLocal(blocoNovo, pisoNovo, nomeLocal);
+                        mapa.adicionarLocal(sc);
                         break;
  
                     case 8:
@@ -280,8 +264,6 @@ public class Teste {
                     default:
                         System.out.println("\nOpção inválida!");
                 }
- 
-            // ── UTILIZADOR NORMAL ──────────────────────────────────────
             } else {
                 switch (opcao) {
                     case 1:
@@ -400,4 +382,3 @@ public class Teste {
         sc.close();
     }
 }
- 
