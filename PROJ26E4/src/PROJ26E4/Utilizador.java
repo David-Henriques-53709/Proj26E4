@@ -10,6 +10,8 @@ public class Utilizador {
     private String password;
     private String tipoUtilizador;
     private ArrayList<Ocorrencia> ocorrencias;
+    private int tentativasFalhadas = 0;
+    private boolean bloqueado = false;
 
     public Utilizador() {
         this.ocorrencias = new ArrayList<>();
@@ -144,6 +146,31 @@ public class Utilizador {
             return;
         }
         ocorrencia.avaliarOcorrencia(classificacao);
+    }
+    
+    public boolean isBloqueado() {
+        return bloqueado;
+    }
+
+    public void bloquear() {
+        this.bloqueado = true;
+    }
+
+    public void desbloquear() {
+        this.bloqueado = false;
+        this.tentativasFalhadas = 0;
+    }
+
+    public void incrementarTentativas() {
+        this.tentativasFalhadas++;
+    }
+
+    public void resetarTentativas() {
+        this.tentativasFalhadas = 0;
+    }
+
+    public int getTentativasFalhadas() {
+        return tentativasFalhadas;
     }
     
     public String toString() {
