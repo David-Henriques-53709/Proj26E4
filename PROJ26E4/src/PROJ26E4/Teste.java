@@ -57,6 +57,8 @@ public class Teste {
         System.out.println("5 - Criar Relatório de Ocorrências");
         System.out.println("6 - Remover Utilizador");
         System.out.println("7 - Adicionar Local Novo");
+        System.out.println("9 - Adicionar Bloco Novo");
+        System.out.println("10 - Desbloquear Conta");
         System.out.println("8 - Logout");
         System.out.println("0 - Sair");
         System.out.println("=======================================================");
@@ -169,7 +171,7 @@ public class Teste {
                         sc.nextLine();
                         Utilizador userEstado = sistema.getUtilizadores().get(userEscolha - 1);
                         if (userEstado.getOcorrencias().isEmpty()) {
-                            System.out.println("\nEsse utilizador não tem ocorrências.");
+                            System.out.println("\nEste utilizador não tem ocorrências.");
                             break;
                         }
                         System.out.println("\n===== OCORRÊNCIAS =====");
@@ -251,7 +253,15 @@ public class Teste {
                     case 7:
                         mapa.adicionarLocal(sc);
                         break;
- 
+                        
+                    case 9:
+                        mapa.adicionarBloco(sc);
+                        break;
+                        
+                    case 10:
+                        sistema.desbloquearUtilizador(sc, sistema.getUtilizadores());
+                        break; 
+                        
                     case 8:
                         utilizadorAtual = null;
                         System.out.println("Logout efetuado com sucesso!");

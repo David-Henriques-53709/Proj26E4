@@ -1,13 +1,20 @@
 package PROJ26E4;
 import java.util.ArrayList;
+import java.util.Scanner;
 public class GereUtilizadores {
 	private ArrayList<Utilizador>utilizadores;
 	public GereUtilizadores() {
 			utilizadores = new ArrayList<>();
 	}
 	public void criarUtilizador(Utilizador u) {
-		utilizadores.add(u);
-		System.out.println("O utilizador foi criado com sucesso!");
+	    for (Utilizador existente : utilizadores) {
+	        if (existente.getIdUtilizador().equalsIgnoreCase(u.getIdUtilizador())) {
+	            System.out.println("Já existe um utilizador com esse ID!");
+	            return;
+	        }
+	    }
+	    utilizadores.add(u);
+	    System.out.println("O utilizador foi criado com sucesso!");
 	}
 	public void removerUtilizador(String idUtilizador) {
 		for(Utilizador u: utilizadores) {
@@ -101,12 +108,50 @@ public class GereUtilizadores {
 		    System.out.println("\n===============================");
 		}
 		public Utilizador login(String email, String password) {
-		    for(Utilizador u : utilizadores) {
-		        if(u.getEmail().equalsIgnoreCase(email)
-		                && u.getPassword().equals(password)) {
-		            return u;
+		    for (Utilizador u : utilizadores) {
+		        if (u.getEmail().equalsIgnoreCase(email)) {
+		            if (u.isBloqueado()) {
+		                System.out.println("Conta bloqueada! Contacte o administrador.");
+		                return null;
+		            }
+		            if (u.getPassword().equals(password)) {
+		                u.resetarTentativas();
+		                return u;
+		            } else {
+		                u.incrementarTentativas();
+		                int restantes = 5 - u.getTentativasFalhadas();
+		                if (u.getTentativasFalhadas() >= 5) {
+		                    u.bloquear();
+		                    System.out.println("Conta bloqueada após 5 tentativas falhadas!");
+		                } else {
+		                    System.out.println("Password incorrecta! Tentativas restantes: " + restantes);
+		                }
+		                return null;
+		            }
 		        }
 		    }
+		    System.out.println("Email não encontrado!");
 		    return null;
+		}
+		public void desbloquearUtilizador(Scanner sc, ArrayList<Utilizador> utilizadores) {
+		    ArrayList<Utilizador> bloqueados = new ArrayList<>();
+		    for (Utilizador u : utilizadores) {
+		        if (u.isBloqueado()) {
+		            bloqueados.add(u);
+		        }
+		    }
+		    if (bloqueados.isEmpty()) {
+		        System.out.println("Não existem contas bloqueadas.");
+		        return;
+		    }
+		    System.out.println("\n===== CONTAS BLOQUEADAS =====");
+		    for (int i = 0; i < bloqueados.size(); i++) {
+		        System.out.println((i + 1) + " - " + bloqueados.get(i).getNome());
+		    }
+		    System.out.print("Escolha o utilizador a desbloquear: ");
+		    int escolha = sc.nextInt();
+		    sc.nextLine();
+		    bloqueados.get(escolha - 1).desbloquear();
+		    System.out.println("Conta desbloqueada com sucesso!");
 		}
 }

@@ -138,7 +138,7 @@ public class Ocorrencia {
 	           "\nPiso          : " + piso +
 	           "\nLocal         : " + local +
 	           "\nAvaliação     : " + textoAvaliacao +
-	           "\nComentários   : " + listaComentarios +
+	           "\n" + listaComentarios +
 	           "\n==================================";
 	}
  }
