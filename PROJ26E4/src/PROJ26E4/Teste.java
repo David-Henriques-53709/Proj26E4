@@ -77,6 +77,19 @@ public class Teste {
         System.out.println("=======================================================");
         System.out.print("Escolha uma opção: ");
     }
+    public static void menuTecnico() {
+    	System.out.println("\n=======================================================");
+        System.out.println("                    MENU TÉCNICO");
+        System.out.println("=======================================================");
+        System.out.println("1 - Ver Todas as Ocorrências");
+        System.out.println("2 - Atualizar Estado de Ocorrência");
+        System.out.println("3 - Adicionar Comentário");
+        System.out.println("8 - Logout");
+        System.out.println("0 - Sair");
+        System.out.println("=======================================================");
+        System.out.print("Escolha uma opção: ");
+    }
+    
     public static void main(String[] args) {
         Teste sistemaVisual = new Teste();
         sistemaVisual.mostrarSistema();
@@ -90,6 +103,8 @@ public class Teste {
                 menuLogin();
             } else if (utilizadorAtual.isAdministrador()) {
                 menuAdmin();
+            } else if (utilizadorAtual.isTecnico()) {
+            	menuTecnico();
             } else {
                 menuUtilizador();
             }
@@ -274,6 +289,118 @@ public class Teste {
                     default:
                         System.out.println("\nOpção inválida!");
                 }
+            } else if (utilizadorAtual.isTecnico()) {
+                switch (opcao) {
+                case 1:
+                    System.out.println("\n========== TODAS AS OCORRÊNCIAS ==========");
+                    boolean temOcorrencias = false;
+                    for (Utilizador u : sistema.getUtilizadores()) {
+                        if (!u.getOcorrencias().isEmpty()) {
+                            temOcorrencias = true;
+                            System.out.println("\nUtilizador: " + u.getNome());
+                            u.consultarOcorrencia();
+                        }
+                    }
+                    if (!temOcorrencias) {
+                        System.out.println("Não existem ocorrências no sistema.");
+                    }
+                    break;
+
+                case 2:
+                    boolean existeAlguma = false;
+                    for (Utilizador u : sistema.getUtilizadores()) {
+                        if (!u.getOcorrencias().isEmpty()) {
+                            existeAlguma = true;
+                            break;
+                        }
+                    }
+                    if (!existeAlguma) {
+                        System.out.println("\nNão existem ocorrências no sistema.");
+                        break;
+                    }
+                    System.out.println("\n===== UTILIZADORES COM OCORRÊNCIAS =====");
+                    for (int i = 0; i < sistema.getUtilizadores().size(); i++) {
+                        if (!sistema.getUtilizadores().get(i).getOcorrencias().isEmpty()) {
+                            System.out.println((i + 1) + " - " + sistema.getUtilizadores().get(i).getNome());
+                        }
+                    }
+                    System.out.print("Escolha o utilizador: ");
+                    int userTecnico = sc.nextInt();
+                    sc.nextLine();
+                    Utilizador uTecnico = sistema.getUtilizadores().get(userTecnico - 1);
+                    System.out.println("\n===== OCORRÊNCIAS =====");
+                    for (int i = 0; i < uTecnico.getOcorrencias().size(); i++) {
+                        System.out.println((i + 1) + " - " + uTecnico.getOcorrencias().get(i).getTitulo());
+                    }
+                    System.out.print("Escolha a ocorrência: ");
+                    int escolhaTecnico = sc.nextInt();
+                    sc.nextLine();
+                    Ocorrencia ocorrenciaTecnico = uTecnico.getOcorrencias().get(escolhaTecnico - 1);
+                    System.out.println("\n1 - Por Resolver");
+                    System.out.println("2 - Em Progresso");
+                    System.out.println("3 - Concluída");
+                    System.out.print("Novo estado: ");
+                    int estadoTecnico = sc.nextInt();
+                    sc.nextLine();
+                    EstadoOcorrencia novoEstadoTecnico;
+                    if (estadoTecnico == 1) {
+                        novoEstadoTecnico = new EstadoOcorrencia("EST-01", "Por Resolver", "Ocorrência Por Resolver", LocalDate.now());
+                    } else if (estadoTecnico == 2) {
+                        novoEstadoTecnico = new EstadoOcorrencia("EST-02", "Em Progresso", "Ocorrência em progresso", LocalDate.now());
+                    } else {
+                        novoEstadoTecnico = new EstadoOcorrencia("EST-03", "Concluída", "Ocorrência concluída", LocalDate.now());
+                    }
+                    sistema.atualizarEstadoOcorrencia(ocorrenciaTecnico, novoEstadoTecnico);
+                    break;
+
+                case 3:
+                    boolean existeParacomentar = false;
+                    for (Utilizador u : sistema.getUtilizadores()) {
+                        if (!u.getOcorrencias().isEmpty()) {
+                            existeParacomentar = true;
+                            break;
+                        }
+                    }
+                    if (!existeParacomentar) {
+                        System.out.println("\nNão existem ocorrências no sistema.");
+                        break;
+                    }
+                    System.out.println("\n===== UTILIZADORES COM OCORRÊNCIAS =====");
+                    for (int i = 0; i < sistema.getUtilizadores().size(); i++) {
+                        if (!sistema.getUtilizadores().get(i).getOcorrencias().isEmpty()) {
+                            System.out.println((i + 1) + " - " + sistema.getUtilizadores().get(i).getNome());
+                        }
+                    }
+                    System.out.print("Escolha o utilizador: ");
+                    int userComentarioTecnico = sc.nextInt();
+                    sc.nextLine();
+                    Utilizador uComentarioTecnico = sistema.getUtilizadores().get(userComentarioTecnico - 1);
+                    System.out.println("\n===== OCORRÊNCIAS =====");
+                    for (int i = 0; i < uComentarioTecnico.getOcorrencias().size(); i++) {
+                        System.out.println((i + 1) + " - " + uComentarioTecnico.getOcorrencias().get(i).getTitulo());
+                    }
+                    System.out.print("Escolha a ocorrência: ");
+                    int ocorrenciaComentarioTecnico = sc.nextInt();
+                    sc.nextLine();
+                    Ocorrencia ocorrenciaComentadaTecnico = uComentarioTecnico.getOcorrencias().get(ocorrenciaComentarioTecnico - 1);
+                    System.out.print("Comentário: ");
+                    String comentarioTecnico = sc.nextLine();
+                    ocorrenciaComentadaTecnico.adicionarComentario(comentarioTecnico, utilizadorAtual.getNome());
+                    break;
+
+                case 8:
+                    utilizadorAtual = null;
+                    System.out.println("Logout efetuado com sucesso!");
+                    break;
+
+                case 0:
+                    System.out.println("\nSistema encerrado.");
+                    break;
+
+                default:
+                    System.out.println("\nOpção inválida!");
+            }
+                
             } else {
                 switch (opcao) {
                     case 1:
