@@ -1,11 +1,25 @@
 package PROJ26E4;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 enum Prioridade{
 	Alta,
 	Média,
 	Baixa	
 }
+
+enum Categoria {
+    Informatica,
+    Manutencao_Geral,
+    Eletricidade,
+    Climatizacao_Ventilacao,
+    Seguranca,
+    Limpeza,
+    Equipamentos,
+    Marketing
+}
+
 public class Ocorrencia {
 	private static int proximoId = 1;
 	private String idOcorrencia;
@@ -17,18 +31,23 @@ public class Ocorrencia {
 	private String bloco;
 	private String piso;
 	private String local;
+	private Integer avaliacao;
+	private Categoria categoria;
+	private ArrayList<Comentario>comentarios;
 	
-	public Ocorrencia(String titulo,String descricao,LocalDate dataCriacao,Prioridade prioridades,EstadoOcorrencia estadoInicial,String bloco,String piso,String local) {
+	public Ocorrencia(String titulo,String descricao,LocalDate dataCriacao,Prioridade prioridades,Categoria categoria,EstadoOcorrencia estadoInicial,String bloco,String piso,String local) {
 		this.idOcorrencia = String.valueOf(proximoId);
 		proximoId++;
 		this.titulo=titulo;
 		this.descricao=descricao;
 		this.dataCriacao=dataCriacao;
 		this.prioridades=prioridades;
+		this.categoria=categoria;
 		this.estadoAtual=estadoInicial;
-		this.bloco = bloco;
-		this.piso = piso;
-		this.local = local;
+		this.bloco=bloco;
+		this.piso=piso;
+		this.local=local;
+		this.comentarios=new ArrayList<>();
  	}
 	public String getIdOcorrencia() {
 		return idOcorrencia;	
@@ -44,6 +63,15 @@ public class Ocorrencia {
 	}
 	public Prioridade getPrioridades() {
 		return prioridades;
+	}
+	public Categoria getCategoria() {
+	    return categoria;
+	}
+	public EstadoOcorrencia getEstadoAtual() {
+		return estadoAtual;
+	}
+	public Integer getAvaliacao() {
+	    return avaliacao;
 	}
 	public void setTitulo(String titulo) {
 		this.titulo=titulo;
@@ -64,17 +92,53 @@ public class Ocorrencia {
             System.out.println("Estado atual: " + estadoAtual);
         }
 	}
+	public void avaliarOcorrencia(int classificacao) {	
+	    if(classificacao < 1 || classificacao > 5) {
+	        System.out.println("A classificação deve ser entre 1 e 5!");
+	        return;
+	    }
+	    this.avaliacao = classificacao;
+	    System.out.println("Avaliação registada com sucesso!");
+	}
+	public void adicionarComentario(String texto, String autor) {
+	    if(texto == null || texto.trim().isEmpty()) {
+	        System.out.println("Erro: comentário vazio!");
+	        return;
+	    }
+	    Comentario comentario =new Comentario(texto, autor);
+	    comentarios.add(comentario);
+	    System.out.println("Comentário adicionado com sucesso!");
+	}
 	public String toString() {
+		String listaComentarios;
+		if(comentarios.isEmpty()) {
+		    listaComentarios = "Sem comentários.";
+		}
+		else {
+		    listaComentarios = "";
+		    for(Comentario c : comentarios) {
+		        listaComentarios += c + "\n";
+		    }
+		}
+		String textoAvaliacao;
+		if(avaliacao == null) {
+		    textoAvaliacao = "Sem avaliação!";
+		} else {
+		    textoAvaliacao = String.valueOf(avaliacao);
+		}
 	    return "\n==================================" +
 	           "\nID Ocorrência : " + idOcorrencia +
 	           "\nTítulo        : " + titulo +
 	           "\nDescrição     : " + descricao +
 	           "\nData Criação  : " + dataCriacao +
 	           "\nPrioridade    : " + prioridades +
+	           "\nCategoria     : " + categoria +
 	           "\nEstado Atual  : " + estadoAtual +
 	           "\nBloco         : " + bloco +
 	           "\nPiso          : " + piso +
 	           "\nLocal         : " + local +
+	           "\nAvaliação     : " + textoAvaliacao +
+	           "\n" + listaComentarios +
 	           "\n==================================";
 	}
  }

@@ -4,24 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Utilizador {
-	
     private String idUtilizador;
     private String nome;
     private String email;
     private String password;
     private String tipoUtilizador;
     private ArrayList<Ocorrencia> ocorrencias;
+    private int tentativasFalhadas = 0;
+    private boolean bloqueado = false;
 
     public Utilizador() {
         this.ocorrencias = new ArrayList<>();
     }
 
-    public Utilizador(String idUtilizador,String nome,String email,String password,String tipoUtilizador) {
+    public Utilizador(String idUtilizador,String nome,String email,String password) {
         this.idUtilizador = idUtilizador;
         this.nome = nome;
         this.email = email;
         this.password = password;
-        this.tipoUtilizador = tipoUtilizador;
+        this.tipoUtilizador = buscarTipoUtilizador(this.email) ;
         this.ocorrencias = new ArrayList<>();
     }
     public String getIdUtilizador() {
@@ -45,10 +46,16 @@ public class Utilizador {
     public String getId() {
         return idUtilizador;
     }
+    public void setTipoUtilizador(
+            String tipoUtilizador
+    ) {
+        this.tipoUtilizador = tipoUtilizador;
+    }
 
     public void criarOcorrencia(String titulo,
                                 String descricao,
                                 Prioridade prioridade,
+                                Categoria categoria,
                                 String bloco,
                                 String piso,
                                 String local) {
@@ -59,12 +66,12 @@ public class Utilizador {
                 "Ocorrência criada pelo utilizador",
                 LocalDate.now()
         );
-
         Ocorrencia novaOcorrencia = new Ocorrencia(
                 titulo,
                 descricao,
                 LocalDate.now(),
                 prioridade,
+                categoria,
                 estadoInicial,
                 bloco,
                 piso,
@@ -86,6 +93,86 @@ public class Utilizador {
             System.out.println(o);
         }
     }
+    
+    public void cancelarOcorrencia(int indice) {
+        if(indice < 0 || indice >= ocorrencias.size()) {
+            System.out.println("Ocorrência inválida!");
+            return;
+        }
+        Ocorrencia ocorrencia = ocorrencias.get(indice);
+        if(!ocorrencia.getEstadoAtual().getNomeEstado().equals("Por Resolver")) {
+            System.out.println("Só pode cancelar ocorrências Por Resolver!");
+            return;
+        }
+        ocorrencias.remove(indice);
+        System.out.println("Ocorrência cancelada com sucesso!"
+        );
+    }
+    
+    public String buscarTipoUtilizador(String email) {
+	    if(email.endsWith("@admin.upt.pt")) {
+	        return "Administrador";
+	    }
+	    else if(email.endsWith("@alunos.upt.pt")) {
+	        return "Aluno";
+	    }
+	    else if(email.endsWith("@upt.pt")) {
+	        return "Funcionário|Docente";
+	    }
+	    else {
+	        System.out.println("Email institucional inválido!");
+	        return null;
+	    }
+	}
+    
+    public boolean isAdministrador() {
+        return tipoUtilizador.equalsIgnoreCase("Administrador");
+    }
+    public boolean isAluno() {
+        return tipoUtilizador.equalsIgnoreCase("Aluno");
+    }
+    public boolean isFuncionario() {
+        return tipoUtilizador.equalsIgnoreCase("Funcionário|Docente");
+    }
+    
+    public void avaliarOcorrencia(int indice, int classificacao) {
+        if(indice < 0 || indice >= ocorrencias.size()) {
+            System.out.println("Ocorrência inválida!");
+            return;
+        }
+        Ocorrencia ocorrencia = ocorrencias.get(indice);
+        if(!ocorrencia.getEstadoAtual().getNomeEstado().equals("Concluída")) {
+            System.out.println("Só pode avaliar ocorrências resolvidas!");
+            return;
+        }
+        ocorrencia.avaliarOcorrencia(classificacao);
+    }
+    
+    public boolean isBloqueado() {
+        return bloqueado;
+    }
+
+    public void bloquear() {
+        this.bloqueado = true;
+    }
+
+    public void desbloquear() {
+        this.bloqueado = false;
+        this.tentativasFalhadas = 0;
+    }
+
+    public void incrementarTentativas() {
+        this.tentativasFalhadas++;
+    }
+
+    public void resetarTentativas() {
+        this.tentativasFalhadas = 0;
+    }
+
+    public int getTentativasFalhadas() {
+        return tentativasFalhadas;
+    }
+    
     public String toString() {
         return "\n==============================" +
                "\nID Utilizador   : " + idUtilizador +
