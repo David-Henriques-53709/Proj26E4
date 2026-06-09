@@ -111,7 +111,8 @@ public class Mapa {
                 return "Sala Desconhecida";
             }
         }
-        if (opcaoEscolhida.equals("Estacionamento")) return "Estacionamento";
+        if (opcaoEscolhida.equals("Estacionamento")) 
+        	return "Estacionamento";
 
         if (blocoEscolha == 1) {
             return resolverEspacoComunBloco1(sc, pisoEscolha);
