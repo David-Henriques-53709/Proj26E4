@@ -119,6 +119,9 @@ public class Utilizador {
 	    else if(email.endsWith("@upt.pt")) {
 	        return "Funcionário|Docente";
 	    }
+	    else if(email.endsWith("@tecnico.upt.pt")) {
+	    	return "Técnico";
+	    }
 	    else {
 	        System.out.println("Email institucional inválido!");
 	        return null;
@@ -133,6 +136,9 @@ public class Utilizador {
     }
     public boolean isFuncionario() {
         return tipoUtilizador.equalsIgnoreCase("Funcionário|Docente");
+    }
+    public boolean isTecnico() {
+    	return tipoUtilizador.equalsIgnoreCase("Técnico");
     }
     
     public void avaliarOcorrencia(int indice, int classificacao) {

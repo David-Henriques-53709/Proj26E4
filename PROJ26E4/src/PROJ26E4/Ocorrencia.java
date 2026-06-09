@@ -1,7 +1,7 @@
 package PROJ26E4;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
+
 
 enum Prioridade{
 	Alta,
