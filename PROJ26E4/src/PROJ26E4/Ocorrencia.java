@@ -33,6 +33,7 @@ public class Ocorrencia {
 	private String local;
 	private Integer avaliacao;
 	private Categoria categoria;
+	private String tecnicoAtribuido = "Não atribuído";
 	private ArrayList<Comentario>comentarios;
 	
 	public Ocorrencia(String titulo,String descricao,LocalDate dataCriacao,Prioridade prioridades,Categoria categoria,EstadoOcorrencia estadoInicial,String bloco,String piso,String local) {
@@ -73,6 +74,9 @@ public class Ocorrencia {
 	public Integer getAvaliacao() {
 	    return avaliacao;
 	}
+	public String getTecnicoAtribuido() {
+	    return tecnicoAtribuido;
+	}
 	public void setTitulo(String titulo) {
 		this.titulo=titulo;
 	}
@@ -84,6 +88,9 @@ public class Ocorrencia {
 	}
 	public void setEstado(EstadoOcorrencia novoEstado) {
 		this.estadoAtual = novoEstado;
+	}
+	public void atribuirTecnico(String nomeTecnico) {
+	    this.tecnicoAtribuido = nomeTecnico;
 	}
 	public void consultarEstado() {
 		if (estadoAtual == null) {
@@ -137,6 +144,7 @@ public class Ocorrencia {
 	           "\nBloco         : " + bloco +
 	           "\nPiso          : " + piso +
 	           "\nLocal         : " + local +
+	           "\nTécnico       : " + tecnicoAtribuido +
 	           "\nAvaliação     : " + textoAvaliacao +
 	           "\n" + listaComentarios +
 	           "\n==================================";
