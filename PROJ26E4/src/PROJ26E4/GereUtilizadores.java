@@ -154,4 +154,13 @@ public class GereUtilizadores {
 		    bloqueados.get(escolha - 1).desbloquear();
 		    System.out.println("Conta desbloqueada com sucesso!");
 		}
+		public ArrayList<Utilizador> getTecnicos() {
+		    ArrayList<Utilizador> tecnicos = new ArrayList<>();
+		    for (Utilizador u : utilizadores) {
+		        if (u.isTecnico()) {
+		            tecnicos.add(u);
+		        }
+		    }
+		    return tecnicos;
+		}
 }
