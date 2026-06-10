@@ -58,9 +58,9 @@ public class Teste {
         System.out.println("5 - Criar Relatório de Ocorrências");
         System.out.println("6 - Remover Utilizador");
         System.out.println("7 - Adicionar Local Novo");
-        System.out.println("9 - Adicionar Bloco Novo");
-        System.out.println("10 - Desbloquear Conta");
-        System.out.println("8 - Logout");
+        System.out.println("8 - Adicionar Bloco Novo");
+        System.out.println("9 - Desbloquear Conta");
+        System.out.println("10 - Logout");
         System.out.println("0 - Sair");
         System.out.println("=======================================================");
         System.out.print("Escolha uma opção: ");
@@ -125,6 +125,29 @@ public class Teste {
                         System.out.print("Password: ");
                         String password = sc.nextLine();
                         Utilizador novo = new Utilizador(id, nome, email, password);
+                        if (novo.isTecnico()) {
+                        	System.out.println("\n===== ESPECIALIDADE DO TÉCNICO =====");
+                        	System.out.println("1 - Informática     → Informática e Equipamentos");
+                        	System.out.println("2 - Manutenção      → Manutenção Geral");
+                        	System.out.println("3 - Eletricidade    → Elétrica");
+                        	System.out.println("4 - Climatização    → Climatização e Ventilação");
+                        	System.out.println("5 - Limpeza         → Limpeza");
+                        	System.out.println("6 - Segurança       → Segurança");
+                        	System.out.println("7 - Marketing       → Marketing");
+                        	System.out.println("=====================================");
+                        	System.out.print("Escolha a especialidade: ");
+                            int espOpcao = sc.nextInt();
+                            sc.nextLine();
+                            switch (espOpcao) {
+                                case 1: novo.setEspecialidade("Informática"); break;
+                                case 2: novo.setEspecialidade("Manutenção"); break;
+                                case 3: novo.setEspecialidade("Eletricidade"); break;
+                                case 4: novo.setEspecialidade("Climatização"); break;
+                                case 5: novo.setEspecialidade("Limpeza"); break;
+                                case 6: novo.setEspecialidade("Segurança"); break;
+                                default: novo.setEspecialidade("Marketing");
+                            }
+                        }
                         sistema.criarUtilizador(novo);
                         break;
                     
@@ -137,8 +160,6 @@ public class Teste {
                         if (utilizadorAtual != null) {
                             System.out.println("Login efetuado com sucesso!");
                             System.out.println("Tipo: " + utilizadorAtual.getTipoUtilizador());
-                        } else {
-                            System.out.println("Credenciais inválidas!");
                         }
                         break;
                     
@@ -215,14 +236,21 @@ public class Teste {
                         int ocorrenciaAtribuir = sc.nextInt();
                         sc.nextLine();
                         Ocorrencia ocorrenciaParaAtribuir = uAtribuir.getOcorrencias().get(ocorrenciaAtribuir - 1);
-                        System.out.println("\n===== TÉCNICOS =====");
-                        for (int i = 0; i < sistema.getTecnicos().size(); i++) {
-                            System.out.println((i + 1) + " - " + sistema.getTecnicos().get(i).getNome());
+                        Categoria catOcorrencia = ocorrenciaParaAtribuir.getCategoria();
+                        ArrayList<Utilizador> tecnicosCompativeis = sistema.getTecnicosCompativeis(catOcorrencia);
+                        if (tecnicosCompativeis.isEmpty()) {
+                            System.out.println("\nNão existem técnicos compatíveis com esta categoria!");
+                            break;
+                        }
+                        System.out.println("\n===== TÉCNICOS COMPATÍVEIS =====");
+                        for (int i = 0; i < tecnicosCompativeis.size(); i++) {
+                            System.out.println((i + 1) + " - " + tecnicosCompativeis.get(i).getNome()
+                                + " (" + tecnicosCompativeis.get(i).getEspecialidade() + ")");
                         }
                         System.out.print("Escolha o técnico: ");
                         int tecnicoEscolha = sc.nextInt();
                         sc.nextLine();
-                        String nomeTecnico = sistema.getTecnicos().get(tecnicoEscolha - 1).getNome();
+                        String nomeTecnico = tecnicosCompativeis.get(tecnicoEscolha - 1).getNome();
                         ocorrenciaParaAtribuir.atribuirTecnico(nomeTecnico);
                         System.out.println("Ocorrência atribuída a " + nomeTecnico + " com sucesso!");
                         break;
@@ -282,15 +310,15 @@ public class Teste {
                         mapa.adicionarLocal(sc);
                         break;
                         
-                    case 9:
+                    case 8:
                         mapa.adicionarBloco(sc);
                         break;
                         
-                    case 10:
+                    case 9:
                         sistema.desbloquearUtilizador(sc, sistema.getUtilizadores());
                         break; 
                         
-                    case 8:
+                    case 10:
                         utilizadorAtual = null;
                         System.out.println("Logout efetuado com sucesso!");
                         break;

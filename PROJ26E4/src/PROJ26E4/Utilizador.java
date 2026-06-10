@@ -12,6 +12,7 @@ public class Utilizador {
     private ArrayList<Ocorrencia> ocorrencias;
     private int tentativasFalhadas = 0;
     private boolean bloqueado = false;
+    private String especialidade = null;
 
     public Utilizador() {
         this.ocorrencias = new ArrayList<>();
@@ -46,10 +47,14 @@ public class Utilizador {
     public String getId() {
         return idUtilizador;
     }
-    public void setTipoUtilizador(
-            String tipoUtilizador
-    ) {
+    public String getEspecialidade() {
+        return especialidade;
+    }
+    public void setTipoUtilizador(String tipoUtilizador) {
         this.tipoUtilizador = tipoUtilizador;
+    }
+    public void setEspecialidade(String especialidade) {
+        this.especialidade = especialidade;
     }
 
     public void criarOcorrencia(String titulo,
@@ -105,8 +110,7 @@ public class Utilizador {
             return;
         }
         ocorrencias.remove(indice);
-        System.out.println("Ocorrência cancelada com sucesso!"
-        );
+        System.out.println("Ocorrência cancelada com sucesso!");
     }
     
     public String buscarTipoUtilizador(String email) {
@@ -180,12 +184,16 @@ public class Utilizador {
     }
     
     public String toString() {
-        return "\n==============================" +
+        String info = "\n==============================" +
                "\nID Utilizador   : " + idUtilizador +
                "\nNome            : " + nome +
                "\nEmail           : " + email +
-               "\nTipo Utilizador : " + tipoUtilizador +
-               "\nOcorrências     : " + ocorrencias.size() +
-               "\n==============================";
+               "\nTipo Utilizador : " + tipoUtilizador;
+        if (isTecnico() && especialidade != null) {
+            info += "\nEspecialidade   : " + especialidade;
+        }
+        info += "\nOcorrências     : " + ocorrencias.size() +
+                "\n==============================";
+        return info;
     }
 }
