@@ -39,14 +39,15 @@ public class GereUtilizadores {
 			ocorrencia.setEstado(novoEstado);
 			System.out.println("Estado da Ocorrência atualizado com sucesso!");
 		}
-		//serve para na class teste na parte de criar ocorrencia pedir quem criou a ocorrencia
+		//Devolve a lista completa de utilizadores — usado no Teste para aceder aos utilizadores.
 		public ArrayList<Utilizador>getUtilizadores(){
 			return utilizadores;
 		}
 		public void criarRelatorioOcorrencias() {
 		    int total = 0;
 		    int concluidas = 0;
-		    int pendentes = 0;
+		    int emProgresso = 0;
+		    int porResolver = 0;
 		    int informatica = 0;
 		    int manutencao_geral = 0;
 		    int eletricidade = 0;
@@ -60,8 +61,10 @@ public class GereUtilizadores {
 		            total++;
 		            if(o.getEstadoAtual().getNomeEstado().equals("Concluída")) {
 		                concluidas++;
+		            } else if(o.getEstadoAtual().getNomeEstado().equals("Em Progresso")) {
+		                emProgresso++;
 		            } else {
-		                pendentes++;
+		                porResolver++;
 		            }
 		            switch(o.getCategoria()) {
 		                case Informatica:
@@ -95,7 +98,8 @@ public class GereUtilizadores {
 		    System.out.println("\nTotal de ocorrências: " + total);
 		    System.out.println("\n===== POR ESTADO =====");
 		    System.out.println("Concluídas : " + concluidas);
-		    System.out.println("Em Progresso  : " + pendentes);
+		    System.out.println("Em Progresso : " + emProgresso);
+		    System.out.println("Por Resolver : " + porResolver);
 		    System.out.println("\n===== POR CATEGORIA =====");
 		    System.out.println("Informática                : " + informatica);
 		    System.out.println("Manutenção Geral           : " + manutencao_geral);
@@ -154,7 +158,7 @@ public class GereUtilizadores {
 		    bloqueados.get(escolha - 1).desbloquear();
 		    System.out.println("Conta desbloqueada com sucesso!");
 		}
-		public ArrayList<Utilizador> getTecnicos() {
+		public ArrayList<Utilizador> getTecnicos() { //Percorre todos os utilizadores e devolve apenas os que são técnicos — usado no Teste.java quando o admin quer atribuir uma ocorrência.
 		    ArrayList<Utilizador> tecnicos = new ArrayList<>();
 		    for (Utilizador u : utilizadores) {
 		        if (u.isTecnico()) {
@@ -162,5 +166,40 @@ public class GereUtilizadores {
 		        }
 		    }
 		    return tecnicos;
+		}
+		public ArrayList<Utilizador> getTecnicosCompativeis(Categoria categoria) {
+		    ArrayList<Utilizador> compativeis = new ArrayList<>();
+		    for (Utilizador u : utilizadores) {
+		        if (!u.isTecnico()) continue;
+		        if (u.getEspecialidade() == null) {
+		            compativeis.add(u);
+		            continue;
+		        }
+		        switch (categoria) {
+		            case Informatica:
+		            case Equipamentos:
+		                if (u.getEspecialidade().equals("Informática")) compativeis.add(u);
+		                break;
+		            case Manutencao_Geral:
+		            	if (u.getEspecialidade().equals("Manutenção")) compativeis.add(u);
+		                break;
+		            case Eletricidade:
+		                if (u.getEspecialidade().equals("Eletricidade")) compativeis.add(u);
+		                break;
+		            case Climatizacao_Ventilacao:
+		                if (u.getEspecialidade().equals("Climatização")) compativeis.add(u);
+		                break;
+		            case Limpeza:
+		                if (u.getEspecialidade().equals("Limpeza")) compativeis.add(u);
+		                break;
+		            case Seguranca:
+		                if (u.getEspecialidade().equals("Segurança")) compativeis.add(u);
+		                break;
+		            case Marketing:
+		                if (u.getEspecialidade().equals("Marketing")) compativeis.add(u);
+		                break;
+		        }
+		    }
+		    return compativeis;
 		}
 }

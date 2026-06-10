@@ -21,6 +21,16 @@ public class Mapa {
     private String getNomeBloco(int blocoOpcao, ArrayList<String> todosOsBlocos) {
         return todosOsBlocos.get(blocoOpcao - 1);
     }
+    private int lerOpcaoValida(Scanner sc, int min, int max) { //serve para evitar que o programa crasha quando o utilizador introduz um número inválido.
+        int opcao = sc.nextInt();
+        sc.nextLine();
+        while (opcao < min || opcao > max) {
+            System.out.println("Opção inválida! Escolha entre " + min + " e " + max + ":");
+            opcao = sc.nextInt();
+            sc.nextLine();
+        }
+        return opcao;
+    }
     public String escolherLocal(Scanner sc) {
         ArrayList<String> todosOsBlocos = new ArrayList<>();
         todosOsBlocos.add("Bloco Principal");
@@ -33,8 +43,7 @@ public class Mapa {
             System.out.println((i + 1) + " - " + todosOsBlocos.get(i));
         }
         System.out.print("Escolha o bloco: ");
-        int blocoEscolha = sc.nextInt();
-        sc.nextLine();
+        int blocoEscolha = lerOpcaoValida(sc, 1, todosOsBlocos.size());
         String bloco = getNomeBloco(blocoEscolha, todosOsBlocos);
         int maxPisos;
         if (blocoEscolha == 1) {
@@ -50,8 +59,7 @@ public class Mapa {
             System.out.println(i + " - Piso " + i);
         }
         System.out.print("Escolha o piso: ");
-        int pisoEscolha = sc.nextInt();
-        sc.nextLine();
+        int pisoEscolha = lerOpcaoValida(sc, 1, maxPisos);
         String piso = "Piso " + pisoEscolha;
         ArrayList<String> opcoesPreDefinidas = getOpcoesPredefinidas(blocoEscolha, pisoEscolha);
         ArrayList<String> locaisAdicionados = getLocaisPorBlocoPiso(bloco, pisoEscolha);
@@ -66,8 +74,7 @@ public class Mapa {
             i++;
         }
         System.out.print("Escolha: ");
-        int localEscolha = sc.nextInt();
-        sc.nextLine();
+        int localEscolha = lerOpcaoValida(sc, 1, opcoesPreDefinidas.size() + locaisAdicionados.size());
         String local;
         int totalPredef = opcoesPreDefinidas.size();
         if (localEscolha <= totalPredef) {
@@ -147,7 +154,11 @@ public class Mapa {
             System.out.println("1 - Corredor\n2 - Casa de Banho");
             System.out.print("Escolha: ");
             int e = sc.nextInt(); sc.nextLine();
-            return e == 1 ? "Corredor" : "Casa de Banho";
+            if (e == 1) {
+                return "Corredor";
+            } else {
+                return "Casa de Banho";
+            }
         }
     }
     private String resolverEspacoComunBloco2(Scanner sc) {
@@ -174,8 +185,7 @@ public class Mapa {
             System.out.println((i + 1) + " - " + todosOsBlocos.get(i));
         }
         System.out.print("Escolha o bloco: ");
-        int blocoOpcao = sc.nextInt();
-        sc.nextLine();
+        int blocoOpcao = lerOpcaoValida(sc, 1, todosOsBlocos.size());
         String bloco = getNomeBloco(blocoOpcao, todosOsBlocos);
         int maxPisos;
         if (blocoOpcao == 1) {
@@ -190,8 +200,7 @@ public class Mapa {
             System.out.println(i + " - Piso " + i);
         }
         System.out.print("Escolha o piso: ");
-        int piso = sc.nextInt();
-        sc.nextLine();
+        int piso = lerOpcaoValida(sc, 1, maxPisos);
         System.out.print("Nome do novo local: ");
         String nome = sc.nextLine();
         for (Local l : locaisNovos) {
